@@ -1,17 +1,50 @@
 package ar.edu.unju.edm.model;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.stereotype.Component;
+@Entity
+@Table (name="POLS")
 @Component
 public class Pol {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
+	@GenericGenerator(name="native", strategy="native")
+	@Column
+	private Integer codigo;
+	@Column
+	@NotBlank
 	private String nombre;
+	@Column
+	@NotBlank
 	private String descripcion;
+	@Column
 	private String etiqueta;
+	@Column
 	private String sitioWeb;
+	@Column
+	@NotNull
 	private int numeroCasa;
+	@Column
+	@NotBlank
 	private String barrio;
+	@Column
+	@NotBlank
 	private String localidad;
+	@Column
+	@NotBlank
+	private String calle;
+	@Column
 	private int localizacionLatitud;
+	@Column
 	private int localizacionLongitud;
 	public Pol() {
 		// TODO Auto-generated constructor stub
@@ -82,6 +115,18 @@ public class Pol {
 	}
 	public void setLocalizacionLongitud(int localizacionLongitud) {
 		this.localizacionLongitud = localizacionLongitud;
+	}
+	public Integer getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+	public String getCalle() {
+		return calle;
+	}
+	public void setCalle(String calle) {
+		this.calle = calle;
 	}
 	
 }
