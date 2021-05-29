@@ -9,6 +9,7 @@ import ar.edu.unju.edm.service.ITuristasService;
 public class TuristaController {
 	
 	@Autowired
+	
 	ITuristasService turistasService;
 
 }
