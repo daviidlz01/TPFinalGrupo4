@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link th:rel="stylesheet" type="text/css" th:href="@{/css/misestilos.css}">
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/css/misestilos.css}">
 <link th:rel="stylesheet" type="text/css"
 	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 <link th:rel="stylesheet"
 	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
-<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>	
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 <meta charset="UTF-8">
 <title>Pol</title>
 </head>
@@ -23,31 +27,63 @@
 				<div class="form-group col-md-6">
 					<label for="nombrepol">Nombre</label> <input type="text"
 						class="form-control" id="nombrepol" th:field="*{nombre}">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error</small>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="descripcionpol">Descripcion</label> <input type="text"
 						class="form-control" id="descripcionpol" th:field="*{descripcion}">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('descripcion')}"
+						th:errors="*{descripcion}">Error</small>
 				</div>
 			</div>
 			<input type="hidden" th:field="*{codigo}" th:if="${editMode}">
-							<p>Direccion de referencia</p>
-				<p>
+			<p>Direccion de referencia</p>
+			<p>
 			<div class="form-row">
 				<div class="form-group col-md-3">
 					<label for="nombrepol">Calle</label> <input type="text"
-						class="form-control" id="nombrepol" th:field="*{calle}">
+						class="form-control" id="nombrepol" th:field="*{calle}"> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('calle')}" th:errors="*{calle}">Error</small>
 				</div>
 				<div class="form-group col-md-3">
 					<label for="barriopol">Barrio</label> <input type="text"
 						class="form-control" id="barriopol" th:field="*{barrio}">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('barrio')}" th:errors="*{barrio}">Error</small>
 				</div>
 				<div class="form-group col-md-3">
 					<label for="numeropol">Numero</label> <input type="number"
 						class="form-control" id="numeropol" th:field="*{numeroCasa}">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('numeroCasa')}"
+						th:errors="*{numeroCasa}">Error</small>
 				</div>
 				<div class="form-group col-md-3">
 					<label for="localidadpol">Localidad</label> <input type="text"
 						class="form-control" id="localidadpol" th:field="*{localidad}">
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}">Error</small>
+				</div>
+			</div>
+			<p>Opcional</p>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="sitiowebpol">Sitio Web</label> <input type="url"
+						class="form-control" id="sitiowebpol" th:field="*{sitioWeb}">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="etiquetapol">Etiqueta</label> <select id="etiquetapol"
+						class="form-control" th:field="*{etiqueta}">
+						<option value="Cultura">Cultura</option>
+						<option value="Naturaleza">Naturaleza</option>
+						<option value="Aventura">Aventura</option>
+						<option value="Deportivo">Deportivo</option>
+						<option value="Gastronomia">Gastronomia</option>
+						<option value="Vacio">Ninguno</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-row">
@@ -74,9 +110,12 @@
 					<th>Barrio</th>
 					<th>Numero</th>
 					<th>Localidad</th>
+					<th>Etiqueta</th>
+					<th>Sitio Web</th>
 					<th>Operaciones</th>
 				</tr>
-				
+				<tr th:if="${pols.empty}">
+					<td colspan="2">No hay productos en el listado</td>
 				<tr th:each="po : ${pols}">
 					<td th:text="${po.nombre}"></td>
 					<td th:text="${po.descripcion}"></td>
@@ -84,6 +123,8 @@
 					<td th:text="${po.barrio}"></td>
 					<td th:text="${po.numeroCasa}"></td>
 					<td th:text="${po.localidad}"></td>
+					<td th:text="${po.etiqueta}"></td>
+					<td th:text="${po.sitioWeb}?: 'Vacio'"></td>
 					<td><a href="#" th:href="@{'/pol/editar/'+${po.codigo}}">
 							<i class="fa fa-edit"></i>
 					</a> <a
@@ -109,8 +150,7 @@
 					<div class="modal-body">
 						<h6>¿Estas seguro de eliminar el Pol?</h6>
 					</div>
-					<input type="hidden" id="identificadorPol"
-						name="codigo" />
+					<input type="hidden" id="identificadorPol" name="codigo" />
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancelar</button>
@@ -119,8 +159,8 @@
 					</div>
 				</div>
 			</div>
-		</div>	
-	</div>		
+		</div>
+	</div>
 	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
 		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
@@ -138,6 +178,6 @@
 			var id = $("#identificadorPol").val();
 			window.location = "eliminarPol/" + id;
 		}
-	</script>	
+	</script>
 </body>
 </html>
