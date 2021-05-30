@@ -48,7 +48,7 @@ public class PolServiceMySQL implements IPolService {
 		Pol polAModificar = polDAO.findByCodigo(polModificado.getCodigo())
 				.orElseThrow(() -> new Exception("El Cliente no fue encontrado"));
 		cambiarPol(polModificado, polAModificar);
-		polDAO.save(polAModificar);
+		polDAO.save(polModificado);
 	}
 
 	private void cambiarPol(Pol desde, Pol hacia) {

@@ -38,6 +38,7 @@ public class PolController {
 			model.addAttribute("unPol", polservice.crearPol());
 			model.addAttribute("editMode", "false");
 		}
+		model.addAttribute("pols",polservice.obtenerTodosPols());
 		return "pol";
 	}
 
