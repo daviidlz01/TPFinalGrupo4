@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turista</title>
+    <link th:rel="icon" th:href="@{../icons/icono-turista.svg}" href="../static/icons/icono-turista.svg">
+    <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/5.15.2/css/all.css}">
+    <link th:rel="stylesheet" th:href="@{../css/styles.css}" type="text/css" href="../static/css/styles.css">
 </head>
+
 <body>
+	<div class="contenedor">
+        <div class="formulario">
+            <form th:object="$(unTurista)" th:action="@{/turista/guardar}" method="post">
+                <div class="form-group">
+                    <label for="nombre" class="form-label">Ingrese Nombre</label>
+                    <input class="form-control" type="text" name="nombre" id="nombre" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="apellido" class="form-label">Ingrese Apellido</label>
+                    <input class="form-control" type="text" name="apellido" id="apellido" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Ingrese email</label>
+                    <input class="form-control" type="text" name="email" id="email" required maxlength="30">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Ingrese Su Contraseña</label>
+                    <input class="form-control" type="password" name="password" id="password" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="paisPro" class="form-label">Ingrese Su Pais De Procedencia</label>
+                    <input class="form-control" type="text" name="paisPro" id="paisPro" required maxlength="30">
+                </div>
+
+            </form>
+        </div>
+	</div>
 
 </body>
 </html>
