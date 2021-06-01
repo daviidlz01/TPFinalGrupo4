@@ -22,6 +22,11 @@ public class Turista {
 	private String paisPro;
 	@Column
 	private int puntos;
+	
+	public Turista() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Integer getIdTurista() {
 		return idTurista;
 	}
