@@ -1,45 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turista</title>
-    <link th:rel="icon" th:href="@{../icons/icono-turista.svg}" href="../static/icons/icono-turista.svg">
-    <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
-    <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/5.15.2/css/all.css}">
-    <link th:rel="stylesheet" th:href="@{../css/styles.css}" type="text/css" href="../static/css/styles.css">
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/css/misestilos.css}">
+<link th:rel="stylesheet" type="text/css"
+	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet"
+	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<meta charset="UTF-8">
+<title>Turista</title>
 </head>
 
 <body>
-	<div class="contenedor">
-        <div class="formulario">
+	<section class="contenedor">
+        <div class="formulario col-md-3">
             <form th:object="$(unTurista)" th:action="@{/turista/guardar}" method="post">
                 <div class="form-group">
-                    <label for="nombre" class="form-label">Ingrese Nombre</label>
+                    <label for="nombre" class="form-label">Nombre</label>
                     <input class="form-control" type="text" name="nombre" id="nombre" required maxlength="20">
                 </div>
                 <div class="form-group">
-                    <label for="apellido" class="form-label">Ingrese Apellido</label>
+                    <label for="apellido" class="form-label">Apellido</label>
                     <input class="form-control" type="text" name="apellido" id="apellido" required maxlength="20">
                 </div>
                 <div class="form-group">
-                    <label for="email" class="form-label">Ingrese email</label>
+                    <label for="email" class="form-label">Email</label>
                     <input class="form-control" type="text" name="email" id="email" required maxlength="30">
                 </div>
                 <div class="form-group">
-                    <label for="password" class="form-label">Ingrese Su Contraseña</label>
-                    <input class="form-control" type="password" name="password" id="password" required maxlength="20">
+                    <label for="password" class="form-label">Password</label>
+                    <input class="form-control" type="password" name="password" id="password" required minlength="8">
                 </div>
                 <div class="form-group">
-                    <label for="paisPro" class="form-label">Ingrese Su Pais De Procedencia</label>
-                    <input class="form-control" type="text" name="paisPro" id="paisPro" required maxlength="30">
+                    <label for="paisPro" class="form-label">Pais de Procedencia</label>
+                    <select class="form-control" name="pais" id="paispro" >
+                    <option value="-- Seleccione su pais --" selected disabled>-- Seleccione su pais --</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Bolvia">Bolvia</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Brasil">Brasil</option>
+                    <option value="USA">Estados Unidos</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Equador">Equador</option>
+                </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="submit" class="btn btn-primary btn-block">
                 </div>
 
             </form>
         </div>
-	</div>
-
+	</section>
+	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
+		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
+		type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
+	<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
+		type="text/javascript"
+		src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>
