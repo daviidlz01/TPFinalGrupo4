@@ -48,7 +48,7 @@ public class TuristaController {
 	}
 	
 	@GetMapping("/turista/editar/{idTurista}")
-	public String editarCliente(Model model, @PathVariable(name="id") int idTurista) throws Exception {
+	public String editarTurista(Model model, @PathVariable(name="id") int idTurista) throws Exception {
 		try {
 			Turista turistaEncontrado = turistaService.encontrarUnTurista(idTurista);
 			model.addAttribute("unTurista", turistaEncontrado);	
@@ -78,7 +78,7 @@ public class TuristaController {
 	}
 
 	@GetMapping("/turista/eliminarTurista/{idTurista}")
-	public String eliminarCliente(Model model, @PathVariable(name="id") int id) {
+	public String eliminarTurista(Model model, @PathVariable(name="id") int id) {
 		LOGGER.info("METHOD: ingresando el metodo Eliminar");
 		try {
 			turistaService.eliminarTurista(id);		
