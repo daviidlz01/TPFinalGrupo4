@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +21,7 @@ public class TuristaController {
 	private static final Log LOGGER = LogFactory.getLog(TuristaController.class);
 	
 	@Autowired
-	@Qualifier("implementacionMYSQLturista")
+
 	ITuristasService turistaService;
 	
 	@GetMapping("/turista/mostrar")
