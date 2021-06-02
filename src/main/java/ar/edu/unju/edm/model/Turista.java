@@ -1,5 +1,12 @@
 package ar.edu.unju.edm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 @Entity
 @Component
@@ -22,7 +29,41 @@ public class Turista {
 	private String paisPro;
 	@Column
 	private int puntos;
+	@Column
+	private double latitud;
+	@Column
+	private double longitud;
 	
+	public Turista(Integer idTurista, String email, String password, String nombre, String apellido, String paisPro,
+			int puntos, double latitud, double longitud) {
+		super();
+		this.idTurista = idTurista;
+		this.email = email;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.paisPro = paisPro;
+		this.puntos = puntos;
+		this.latitud = latitud;
+		this.longitud = longitud;
+	}
+
+	public double getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(double latitud) {
+		this.latitud = latitud;
+	}
+
+	public double getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(double longitud) {
+		this.longitud = longitud;
+	}
+
 	public Turista() {
 		// TODO Auto-generated constructor stub
 	}
@@ -87,6 +128,11 @@ public class Turista {
 		result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((idTurista == null) ? 0 : idTurista.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(latitud);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(longitud);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((paisPro == null) ? 0 : paisPro.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -116,6 +162,10 @@ public class Turista {
 			if (other.idTurista != null)
 				return false;
 		} else if (!idTurista.equals(other.idTurista))
+			return false;
+		if (Double.doubleToLongBits(latitud) != Double.doubleToLongBits(other.latitud))
+			return false;
+		if (Double.doubleToLongBits(longitud) != Double.doubleToLongBits(other.longitud))
 			return false;
 		if (nombre == null) {
 			if (other.nombre != null)
