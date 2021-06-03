@@ -3,12 +3,13 @@ package ar.edu.unju.edm.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.repository.ITuristasDAO;
 import ar.edu.unju.edm.service.ITuristasService;
-
+@Qualifier
 @Service
 public class TuristasServiceMySQL implements ITuristasService {
 

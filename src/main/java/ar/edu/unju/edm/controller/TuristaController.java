@@ -21,8 +21,6 @@ public class TuristaController {
 	private static final Log LOGGER = LogFactory.getLog(TuristaController.class);
 	
 	@Autowired
-	ITuristasService turistaService;
-	
 	@GetMapping("/turista/mostrar")
 	public String cargarTurista(Model model) {
 		model.addAttribute("unTurista", turistaService.crearTurista());
