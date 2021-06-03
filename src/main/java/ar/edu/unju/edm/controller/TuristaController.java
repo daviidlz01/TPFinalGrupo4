@@ -21,12 +21,10 @@ public class TuristaController {
 	private static final Log LOGGER = LogFactory.getLog(TuristaController.class);
 	
 	@Autowired
-
-	ITuristasService turistaService;
-	
 	@GetMapping("/turista/mostrar")
 	public String cargarTurista(Model model) {
 		model.addAttribute("unTurista", turistaService.crearTurista());
+		model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
 		return("turista");
 	}
 	
@@ -36,18 +34,20 @@ public class TuristaController {
 		if (resultado.hasErrors()) 
 		{
 			model.addAttribute("unTurista", nuevoTurista);
+			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
 			return("turista");
 		}
 		else 
 		{
 			LOGGER.info("METHOD: ingresando el metodo Guardar");
 			turistaService.guardarTurista(nuevoTurista);
+			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
 			return "redirect:/turista/mostrar";
 		}
 	}
 	
 	@GetMapping("/turista/editar/{idTurista}")
-	public String editarTurista(Model model, @PathVariable(name="id") int idTurista) throws Exception {
+	public String editarTurista(Model model, @PathVariable(name="idTurista") int idTurista) throws Exception {
 		try {
 			Turista turistaEncontrado = turistaService.encontrarUnTurista(idTurista);
 			model.addAttribute("unTurista", turistaEncontrado);	
@@ -55,9 +55,10 @@ public class TuristaController {
 		}
 		catch (Exception e) {
 			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
-			model.addAttribute("unCliente", turistaService.crearTurista());
+			model.addAttribute("unTurista", turistaService.crearTurista());
 			model.addAttribute("editMode", "false");
 		}
+		model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
 		return("turista");
 	}
 	
@@ -73,11 +74,12 @@ public class TuristaController {
 			model.addAttribute("unTurista", turistaModificado);
 			model.addAttribute("editMode", "true");
 		}
-		return("turista");
+		model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
+		return "redirect:/turista/mostrar";
 	}
 
 	@GetMapping("/turista/eliminarTurista/{idTurista}")
-	public String eliminarTurista(Model model, @PathVariable(name="id") int id) {
+	public String eliminarTurista(Model model, @PathVariable(name="idTurista") int id) {
 		LOGGER.info("METHOD: ingresando el metodo Eliminar");
 		try {
 			turistaService.eliminarTurista(id);		
