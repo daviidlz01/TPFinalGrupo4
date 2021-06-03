@@ -1,10 +1,13 @@
 package ar.edu.unju.edm.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -52,6 +55,10 @@ public class Pol {
 	private int localizacionLatitud;
 	@Column
 	private int localizacionLongitud;
+	
+	@ManyToOne
+	@JoinColumn(name = "id")
+	private Turista otroTurista;
 	public Pol() {
 		// TODO Auto-generated constructor stub
 	}
