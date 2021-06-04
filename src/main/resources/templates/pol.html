@@ -22,7 +22,7 @@
 		<h2>Formulario</h2>
 		<form id="formPol" th:object="${unPol}"
 			th:action="${editMode}?@{/pol/modificar}:@{/pol/guardar}"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="nombrepol">Nombre</label> <input type="text"
@@ -68,7 +68,7 @@
 						th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}">Error</small>
 				</div>
 			</div>
-			<p>Opcional</p>
+			<p>Opcional 1</p>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="sitiowebpol">Sitio Web</label> <input type="url"
@@ -77,6 +77,7 @@
 				<div class="form-group col-md-6">
 					<label for="etiquetapol">Etiqueta</label> <select id="etiquetapol"
 						class="form-control" th:field="*{etiqueta}">
+						<option value="--Seleccione una etiqueta--" selected disabled>-- Seleccione una etiqueta --</option>
 						<option value="Cultura">Cultura</option>
 						<option value="Naturaleza">Naturaleza</option>
 						<option value="Aventura">Aventura</option>
@@ -85,6 +86,20 @@
 						<option value="Vacio">Ninguno</option>
 					</select>
 				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col md-6">
+						<label for="file" class="col-sm-4 col-form-label" th:field="*{fotoEnlace}">
+											Subir Imagen </label>
+										<div class="col-sm-10">
+											<input multiple type="file" name="file" class="form-control-file"
+												id="file"
+												accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg"
+												onchange="loadFile(event)">
+											<img id="output" style="padding-top: 2px; width: 146px;" />
+										</div>
+									
+					</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -160,6 +175,27 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="modalVender" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-dialog-centered" >
+				<div class="modal-content">
+				
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="row">
+					<div th:each="c : ${pols}">
+						<div class="col-sm-6">
+							<div class="card" style="width: 14.99999rem;margin-top: 10px">
+		  									<img th:src="*{'data:;base64,'+c.fotoEnlace}" class="card-img-top" alt="imagen de producto">	
+		  						</div>
+								<div class="card-body">
+									<p class="card-text" th:text="${'Nombre: '+c.nombre}">Nombre</p>
+								</div>
+							</div>
+						</div>
+			</div>
+		</div>
 	</div>
 	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
 		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
@@ -179,5 +215,12 @@
 			window.location = "eliminarPol/" + id;
 		}
 	</script>
+	<script type="text/javascript">
+			$(document).ready(function() { $(".link-vender").on("click", function(event) {
+									event.preventDefault();
+									$("#modalVender").modal("show").find(".modal-content").load($(this).attr("href"));
+								});
+					});
+		</script>	
 </body>
 </html>

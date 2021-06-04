@@ -21,9 +21,7 @@
 <body>
 	<section class="contenedor">
         <div class="formulario col-md-3">
-
             <form th:object="${unTurista}" th:action="${editMode}?@{/turista/modificar}:@{/turista/guardar}" method="post">
-
                 <div class="form-group">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input class="form-control" type="text" name="nombre" id="nombre" th:field="*{nombre}" required maxlength="20">

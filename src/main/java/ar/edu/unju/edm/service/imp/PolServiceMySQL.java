@@ -50,7 +50,7 @@ public class PolServiceMySQL implements IPolService {
 		cambiarPol(polModificado, polAModificar);
 		polDAO.save(polModificado);
 	}
-
+//pruebadea
 	private void cambiarPol(Pol desde, Pol hacia) {
 		hacia.setBarrio(desde.getBarrio());
 		hacia.setDescripcion(desde.getDescripcion());
@@ -59,6 +59,7 @@ public class PolServiceMySQL implements IPolService {
 		hacia.setNombre(desde.getNombre());
 		hacia.setNumeroCasa(desde.getNumeroCasa());
 		hacia.setSitioWeb(desde.getSitioWeb());
+		hacia.setFotoEnlace(desde.getFotoEnlace());
 	}
 
 }

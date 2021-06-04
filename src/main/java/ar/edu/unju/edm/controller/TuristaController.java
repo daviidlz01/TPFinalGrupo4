@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,13 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.ITuristasService;
-@Qualifier("TuristasServiceMySQL")
+
 @Controller
 public class TuristaController {
 	private static final Log LOGGER = LogFactory.getLog(TuristaController.class);
 	
 	@Autowired
 	ITuristasService turistaService;
+	
 	@GetMapping("/turista/mostrar")
 	public String cargarTurista(Model model) {
 		model.addAttribute("unTurista", turistaService.crearTurista());
