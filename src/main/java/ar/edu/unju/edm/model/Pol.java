@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Table (name="POLS")
 @Component
 public class Pol {
-	//prueba
+	//pruebadea
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native", strategy="native")
