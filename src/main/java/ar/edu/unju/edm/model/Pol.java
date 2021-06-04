@@ -1,10 +1,12 @@
 package ar.edu.unju.edm.model;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -52,6 +54,10 @@ public class Pol {
 	private int localizacionLatitud;
 	@Column
 	private int localizacionLongitud;
+	@Column(columnDefinition = "LONGBLOB")
+	private String fotoEnlace;
+	@OneToMany(mappedBy="pol")
+	private List<Fotografia> foto;
 	public Pol() {
 		// TODO Auto-generated constructor stub
 	}
@@ -133,6 +139,18 @@ public class Pol {
 	}
 	public void setCalle(String calle) {
 		this.calle = calle;
+	}
+	public List<Fotografia> getFoto() {
+		return foto;
+	}
+	public void setFoto(List<Fotografia> foto) {
+		this.foto = foto;
+	}
+	public String getFotoEnlace() {
+		return fotoEnlace;
+	}
+	public void setFotoEnlace(String fotoEnlace) {
+		this.fotoEnlace = fotoEnlace;
 	}
 	
 }
