@@ -52,7 +52,7 @@ public class PolController {
 		model.addAttribute("pols",polservice.obtenerTodosPols());
 		return "pol";
 	}
-
+	//prueba
 	@PostMapping(value="/pol/guardar",consumes="multipart/form-data")
 	public String guardarPol(@Valid @RequestParam("file") MultipartFile file,@ModelAttribute("unPol") Pol nuevoPol, BindingResult resultado, Model model)throws IOException {
 		if (resultado.hasErrors()) {
