@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -57,8 +59,17 @@ public class Pol {
 	private int localizacionLongitud;
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace;
-	@OneToMany(mappedBy="pol")
 	private List<Fotografia> foto;
+	
+	@ManyToOne
+	@JoinColumn(name="Turista", referencedColumnName="idTurista")
+	private Turista turista1;
+	@ManyToOne
+	@JoinColumn(name = "eMail")
+	private Turista turista;
+	@ManyToOne
+	@JoinColumn(name = "codpol")
+	private Pol pol;
 	public Pol() {
 		// TODO Auto-generated constructor stub
 	}
