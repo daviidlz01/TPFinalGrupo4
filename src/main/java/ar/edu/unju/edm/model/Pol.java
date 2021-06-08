@@ -57,14 +57,28 @@ public class Pol {
 	private int localizacionLongitud;
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace;
+	@Column(columnDefinition = "LONGBLOB")
+	private String fotoEnlace2;
+	@Column(columnDefinition = "LONGBLOB")
+	private String fotoEnlace3;
 	@OneToMany(mappedBy="pol")
 	private List<Fotografia> foto;
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
+	private int cont;
 	public Pol() {
 		// TODO Auto-generated constructor stub
 	}
-	public Pol(String nombre, String descripcion, String etiqueta, String sitioWeb, int numeroCasa, String barrio,
-			String localidad, int localizacionLatitud, int localizacionLongitud) {
+	
+	public Pol(Integer codigo,
+			@NotBlank(message = "El nombre del PoI es obligatorio") @Pattern(regexp = "[A-Za-z]+", message = "Solo se permiten letras") String nombre,
+			@NotBlank(message = "La descripcion es obligatoria") String descripcion, String etiqueta, String sitioWeb,
+			@NotNull @Min(value = 1, message = "Numero minimo 1") @Max(value = 10000, message = "Numero maximo 10000") int numeroCasa,
+			@NotBlank(message = "El nombre del barrio es obligatorio") String barrio,
+			@NotBlank(message = "El nombre de la localidad es obligatoria") String localidad,
+			@NotBlank(message = "Campo obligatorio") String calle, int localizacionLatitud, int localizacionLongitud,
+			String fotoEnlace, String fotoEnlace2, String fotoEnlace3) {
 		super();
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.etiqueta = etiqueta;
@@ -72,9 +86,14 @@ public class Pol {
 		this.numeroCasa = numeroCasa;
 		this.barrio = barrio;
 		this.localidad = localidad;
+		this.calle = calle;
 		this.localizacionLatitud = localizacionLatitud;
 		this.localizacionLongitud = localizacionLongitud;
+		this.fotoEnlace = fotoEnlace;
+		this.fotoEnlace2 = fotoEnlace2;
+		this.fotoEnlace3 = fotoEnlace3;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -152,6 +171,26 @@ public class Pol {
 	}
 	public void setFotoEnlace(String fotoEnlace) {
 		this.fotoEnlace = fotoEnlace;
+	}
+	public String getFotoEnlace2() {
+		return fotoEnlace2;
+	}
+	public void setFotoEnlace2(String fotoEnlace2) {
+		this.fotoEnlace2 = fotoEnlace2;
+	}
+	public String getFotoEnlace3() {
+		return fotoEnlace3;
+	}
+	public void setFotoEnlace3(String fotoEnlace3) {
+		this.fotoEnlace3 = fotoEnlace3;
+	}
+
+	public int getCont() {
+		return cont;
+	}
+
+	public void setCont(int cont) {
+		this.cont = cont;
 	}
 	
 }
