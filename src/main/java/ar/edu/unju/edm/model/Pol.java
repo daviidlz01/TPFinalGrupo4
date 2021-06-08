@@ -68,6 +68,7 @@ public class Pol {
 	@JoinColumn(name = "eMail")
 	private Turista turista;
 	@ManyToOne
+
 	@JoinColumn(name = "codpol")
 	private Pol pol;
 	public Pol() {
