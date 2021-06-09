@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet" type="text/css"
+	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet"
+	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<link th:rel="stylesheet" th:href="@{../css/styles.css}" type="text/css" href="../static/css/styles.css">
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+    <section class="contenor">
+        <form method="POST">
+            <div class="flores col-md-2">
+                <label for="email" class="flores">ingrese su email</label>
+                <input type="text" name="email" id="email">
+            </div>
+            <div class="flores col-md-2">
+                <label for="contraseña" class="flores">ingrese su contraseña</label>
+                <input type="password" name="contraseña" id="contraseña">
+            </div>
+            
+            <div class="flores col-md-2">
+                <input type="submit" class="btn btn-success btn-block">
+            </div>
+            <div class="flores col-md-2">
+                <input type="submit" class="btn btn-danger btn-block">
+            </div>
+            <div class="flores col-md-2">
+                <input type="submit" class="btn btn-primary btn-block">
+            </div>
+
+
+
+        </form>
+
+    </section>
+    
+</body>
+</html>
