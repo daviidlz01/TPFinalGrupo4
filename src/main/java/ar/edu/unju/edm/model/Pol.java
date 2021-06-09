@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -57,6 +59,7 @@ public class Pol {
 	private int localizacionLongitud;
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace;
+  //inicio
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace2;
 	@Column(columnDefinition = "LONGBLOB")
@@ -65,6 +68,8 @@ public class Pol {
 	private List<Fotografia> foto;
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	private int cont;
+  //fin 
+
 	public Pol() {
 		// TODO Auto-generated constructor stub
 	}
