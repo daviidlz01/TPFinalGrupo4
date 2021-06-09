@@ -1,10 +1,14 @@
 package ar.edu.unju.edm.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +33,7 @@ public class PolController {
 	Fotografia foto;
 	@Autowired
 	IFotografiaService fotoservice;
+	private static final Log LOGGER = LogFactory.getLog(PolController.class);
 	@GetMapping("/pol/mostrar")
 	public String cargarPol(Model model) {
 		model.addAttribute("unPol", polservice.crearPol());
@@ -54,16 +59,36 @@ public class PolController {
 	}
 	//pruebadea
 	@PostMapping(value="/pol/guardar",consumes="multipart/form-data")
-	public String guardarPol(@Valid @RequestParam("file") MultipartFile file,@ModelAttribute("unPol") Pol nuevoPol, BindingResult resultado, Model model)throws IOException {
+	public String guardarPol(@Valid @RequestParam("file") MultipartFile file,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3, @Valid @ModelAttribute("unPol") Pol nuevoPol, BindingResult resultado, Model model)throws IOException {
 		if (resultado.hasErrors()) {
 			model.addAttribute("unPol", nuevoPol);
 			model.addAttribute("pols", polservice.obtenerTodosPols());
 			return "pol";
 		} else {
 			byte[] content = file.getBytes();
+			byte[] content2 = file2.getBytes();
+			byte[] content3 = file3.getBytes();
 			String base64 = Base64.getEncoder().encodeToString(content);
+			String base65 = Base64.getEncoder().encodeToString(content2);
+			String base66 = Base64.getEncoder().encodeToString(content3);
+			List<Pol> imagenes=new ArrayList<>();
 			nuevoPol.setFotoEnlace(base64);
+			if(base65.equals("")) {
+				
+			}
+			else {
+				nuevoPol.setFotoEnlace2(base65);
+			}
+			if(base66.equals("")) {
+				
+			}
+			else {
+				nuevoPol.setFotoEnlace2(base66);
+			}
+			imagenes.add(nuevoPol);
+			LOGGER.info("Hola soy:"+base65+"a");
 			polservice.guardarPol(nuevoPol);
+			model.addAttribute("imagenes",imagenes);
 			model.addAttribute("unPol", new Pol());
 			model.addAttribute("pols", polservice.obtenerTodosPols());
 			return "redirect:/pol/mostrar";
@@ -72,11 +97,27 @@ public class PolController {
 	}
 
 	@PostMapping(value="/pol/modificar",consumes="multipart/form-data")
-	public String modificarPol(@RequestParam("file") MultipartFile file, @ModelAttribute("unPol") Pol polModificado, Model model)throws IOException {
+	public String modificarPol(@RequestParam("file") MultipartFile file,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3 ,@ModelAttribute("unPol") Pol polModificado, Model model)throws IOException {
 		try {
 			byte[] content = file.getBytes();
+			byte[] content2 = file2.getBytes();
+			byte[] content3 = file3.getBytes();
 			String base64 = Base64.getEncoder().encodeToString(content);
+			String base65 = Base64.getEncoder().encodeToString(content2);
+			String base66 = Base64.getEncoder().encodeToString(content3);
 			polModificado.setFotoEnlace(base64);
+			if(base65.equals("")) {
+				
+			}
+			else {
+				polModificado.setFotoEnlace2(base65);
+			}
+			if(base66.equals("")) {
+				
+			}
+			else {
+				polModificado.setFotoEnlace2(base66);
+			}
 			polservice.modificarPol(polModificado);
 			model.addAttribute("unPol", new Pol());
 			model.addAttribute("editMode", "false");
