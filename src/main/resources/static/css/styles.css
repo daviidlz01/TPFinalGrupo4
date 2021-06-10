@@ -1,0 +1,7 @@
+body{
+    background-image: url(https://i.ytimg.com/vi/lzTFZEGL3lA/maxresdefault.jpg);
+    background-repeat: no-repeat; /* hace que la imagen no se repita */
+    background-position: center center; /* hace que la imagen se pocicione en el centro */
+    background-attachment: fixed;  /* hace que la imagen se vea piola */
+    background-size: cover; /* hace que la imagen sea responciva */
+}
