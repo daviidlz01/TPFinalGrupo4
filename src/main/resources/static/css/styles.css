@@ -17,8 +17,14 @@ margin-top: 200px;
 .form-floating{
     height: 100%;
     width: 100%;
-    margin-left: 1400px;
-    padding: 15px;
+  /*  margin-left: 1400px; */
+    max-width: 600px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 7px;
     background-color: rgba(0, 0, 0, 0.452);
     color: #ffff;
 }
