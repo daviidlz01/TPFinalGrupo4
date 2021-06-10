@@ -1,0 +1,37 @@
+.formulario {
+	width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+	
+}
+.tituloform{
+	
+	
+	color: white;
+	
+}
+.form-group{
+	
+	
+	color: white;
+}
+.btn{
+	
+	padding: 0.5em 1em;
+  border: none;
+  background: rgb(100, 200, 255);
+  cursor: pointer;
+}
+body{
+	background-image: url(https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/08/fondos-pantalla-full-hd-animales_4.jpg?itok=uLivpi4V);
+    background-repeat: no-repeat; /* hace que la imagen no se repita */
+    background-position: center center; /* hace que la imagen se pocicione en el centro */
+    background-attachment: fixed;  /* hace que la imagen se vea piola */
+    background-size: cover; /* hace que la imagen sea responciva */
+	
+}
