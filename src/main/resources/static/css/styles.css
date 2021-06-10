@@ -5,3 +5,28 @@ body{
     background-attachment: fixed;  /* hace que la imagen se vea piola */
     background-size: cover; /* hace que la imagen sea responciva */
 }
+.contenedor {
+width: 100%;
+padding: 5px;
+margin-top: 200px;
+
+}
+
+
+.form-floating{
+    height: 100%;
+    width: 100%;
+    margin-left: 1400px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.452);
+    color: #ffff;
+}
+
+.logo{
+    margin-top: -100px;
+    margin-bottom: 30px;
+    margin-left: 130px;
+    width: 45%;
+    border-radius: 50%;
+    border: solid #ffff 1px;
+}
