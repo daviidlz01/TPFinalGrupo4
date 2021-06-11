@@ -9,5 +9,5 @@ import ar.edu.unju.edm.model.Turista;
 @Repository
 public interface ITuristasDAO  extends CrudRepository <Turista, Integer>{
 	public Optional<Turista> findByidTurista(int idTurista);
-
+	public Optional<Turista> findByEmail(String email);
 }

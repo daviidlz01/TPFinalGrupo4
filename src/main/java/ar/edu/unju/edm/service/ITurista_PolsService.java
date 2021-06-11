@@ -8,5 +8,5 @@ public interface ITurista_PolsService {
 	public void guardarTurista_pols(Turista_Pols valoracion);
 	public Turista_Pols crearTurista_pols();
 	public List<Turista_Pols> obtenerTodosTurista_pols();
-	public Turista_Pols encontrarTurista_pols()throws Exception;
+	public Turista_Pols encontrarTurista_pols(int id)throws Exception;
 }

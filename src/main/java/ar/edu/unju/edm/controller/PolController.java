@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ar.edu.unju.edm.model.Fotografia;
 import ar.edu.unju.edm.model.Pol;
-import ar.edu.unju.edm.service.IFotografiaService;
 import ar.edu.unju.edm.service.IPolService;
 
 @Controller
@@ -31,8 +30,6 @@ public class PolController {
 	IPolService polservice;
 	@Autowired
 	Fotografia foto;
-	@Autowired
-	IFotografiaService fotoservice;
 	private static final Log LOGGER = LogFactory.getLog(PolController.class);
 	@GetMapping("/pol/mostrar")
 	public String cargarPol(Model model) {

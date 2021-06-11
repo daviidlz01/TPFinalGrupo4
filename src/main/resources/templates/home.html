@@ -6,7 +6,7 @@
 <link th:rel="stylesheet"
 	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
 <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<link th:rel="stylesheet" th:href="@{../css/styles.css}" type="text/css" href="../static/css/styles.css">
+<link th:rel="stylesheet" th:href="@{/css/stylish.css}" type="text/css" href="../static/css/styles.css">
 <script
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script
@@ -18,22 +18,22 @@
 <meta charset="UTF-8">
 <title>Home</title>
 </head>
-<body>
+<body style="background:black">
 <div class="form-row">
-<div><img th:src="@{/images/fondohome.jpg}" width="800" height="600" class="rank" alt=""> </div>
+<div><img th:src="@{/img/fondohome.jpg}" width="800" height="610" class="img-fluid" alt=""> </div>
     <section class="contenedor bg-body text-dark">
-        <form method="POST">
+        <form th:action="@{/login}" method="post">
             <div class="flores col-md-8">
             
-                <label for="email" class="flores">ingrese su email</label>
+                <label for="email" class="flores" style="color:white">Ingrese su email</label>
                 <br>
-                <input type="text" name="email" id="email">
+                <input type="text" name="correo" id="email">
             </div>
             <div class="flores col-md-8">
-                <label for="contraseña" class="flores">ingrese su contraseña</label>
+                <label for="contraseña" class="flores" style="color:white">Ingrese su contraseña</label>
                 <br>
-                <input type="password" name="contraseña" id="contraseña">
-                <a href="#"> OLVIDASTE TU PASSWORD?</a> <br> <a href="#"> 
+                <input type="password" name="password" id="contraseña">
+                <a href="#"> OLVIDASTE TU PASSWORD?</a> <br> <a href="/turista/mostrar"> 
 								NO Tenes cuenta?</a>
             </div>
             <br>
@@ -50,12 +50,9 @@
                 <input type="submit" value="Ingrese con faisbuk" class="btn btn-primary btn-block">
             </div>
             <br>
+           </form> 
+     </section>
 </div>
-
-
-        </form>
-
-    </section>
     
 </body>
 </html>

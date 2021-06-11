@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/css/misestilos.css}">
+<link th:rel="stylesheet" type="text/css"
+	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet"
+	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<meta charset="UTF-8">
+<title>MiPerfil</title>
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div class="container">
+		<h3>Mi Perfil</h3>
+		<form th:object="${unTurista}" th:action="@{/turista/miperfil/editar}" method="post">
+			<div class="form-group">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input class="form-control" type="text" name="nombre" id="nombre" th:field="*{nombre}" required maxlength="20">
+                </div>
+                <input type="hidden" th:field="*{idTurista}">
+                <div class="form-group">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input class="form-control" type="text" name="apellido" id="apellido"  th:field="*{apellido}" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input class="form-control" type="text" name="email" id="email" th:field="*{email}" required maxlength="30">
+                </div>
+						<input class="form-control" type=hidden th:field="*{password}">
+                <div class="form-group">
+                    <label for="paisPro" class="form-label">Pais de Procedencia</label>
+                    <select class="form-control" name="pais" id="paispro" th:field="*{paisPro}">
+                    <option value="-- Seleccione su pais --" selected disabled>-- Seleccione su pais --</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Bolvia">Bolvia</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Brasil">Brasil</option>
+                    <option value="USA">Estados Unidos</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Ecuador">Ecuador</option>
+                </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Modificar</button>
+		</form>
+	</div>
+</body>
+</html>

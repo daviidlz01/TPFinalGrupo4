@@ -29,12 +29,12 @@ public class Turista_PolsServiceMySQL implements ITurista_PolsService{
 	@Override
 	public List<Turista_Pols> obtenerTodosTurista_pols() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Turista_Pols>) t_pDAO.findAll();
 	}
 
 	@Override
-	public Turista_Pols encontrarTurista_pols() throws Exception {
+	public Turista_Pols encontrarTurista_pols(int id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return t_pDAO.findById(id).orElseThrow(()->new Exception("El Comentario no fue encontrado"));
 	}
 }

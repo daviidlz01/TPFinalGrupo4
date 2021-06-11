@@ -5,6 +5,9 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,21 +18,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.ITuristasService;
-
+@Qualifier("TuristasServiceMySQL")
 @Controller
 public class TuristaController {
 	private static final Log LOGGER = LogFactory.getLog(TuristaController.class);
 	
 	@Autowired
 	ITuristasService turistaService;
-	
 	@GetMapping("/turista/mostrar")
 	public String cargarTurista(Model model) {
 		model.addAttribute("unTurista", turistaService.crearTurista());
 		model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
+		//UserDetails userTurista = (UserDetails) authentication.getPrincipal();
+		//System.out.println(userTurista.getUsername());
 		return("turista");
 	}
-	
+	@GetMapping("/turista/miperfil")
+	public String miPerfilTurista(Model model,Authentication authentication)throws Exception{
+		UserDetails userTurista = (UserDetails) authentication.getPrincipal();
+		model.addAttribute("unTurista",turistaService.encontrarUnTurista(userTurista.getUsername()));
+		System.out.println(userTurista.getUsername());
+		return "turista-editar";
+	}
+	@PostMapping("/turista/miperfil/editar")
+	public String miPerfilTuristaModificar(@ModelAttribute("unTurista") Turista turistaModificado, Model model){
+		try {
+			turistaService.modificarTurista(turistaModificado);
+			model.addAttribute("unTurista", new Turista());				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
+			model.addAttribute("unTurista", turistaModificado);
+		}
+		return "redirect:/turista/miperfil";
+	}
 	@PostMapping("/turista/guardar")
 	public String guardarNuevoTurista(@Valid @ModelAttribute("unTurista") Turista nuevoTurista, BindingResult resultado ,Model model) {
 		
@@ -44,7 +66,7 @@ public class TuristaController {
 			LOGGER.info("METHOD: ingresando el metodo Guardar");
 			turistaService.guardarTurista(nuevoTurista);
 			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
-			return "redirect:/turista/mostrar";
+			return "redirect:/home";
 		}
 	}
 	

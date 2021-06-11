@@ -18,6 +18,8 @@
 <title>Comentarios</title>
 </head>
 <body>
+	<div th:insert="layout/header :: header"></div>
+	
 	<div class="container"></div>
 		<div class="row">
 			<div th:each="p : ${pols}">
@@ -52,7 +54,7 @@
 									<h5 class="card-title" th:text="${'Pol: ' + p.nombre}">Nombre</h5>
 									<p class="card-text" th:text="${'Descripcion: '+p.descripcion}">Descripcion</p>
 									<p class="card-text" th:text="${'Codigo: '+p.codigo}"></p>
-									<a class="stretched-link btn btn-primary link-vender" th:href="@{'/pol/comentarios/'+${p.codigo}}"><i class="fas fa-shopping-cart mr-2"></i> Comentar</a>
+									<a class="stretched-link btn btn-primary link-vender" th:href="@{'/pol/comentarios/'+${p.codigo}}">Comentar</a>
 								</div>
 							</div>
 						</div>
