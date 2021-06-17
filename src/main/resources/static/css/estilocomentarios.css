@@ -1,0 +1,19 @@
+body{
+	 /*background-image: url(https://c1.wallpaperflare.com/preview/916/1/165/flame-north-jujuy-coya.jpg);*/
+     background-image: url(https://i.pinimg.com/originals/bc/76/e8/bc76e8c5fc0e507e81c8407f198c8cf7.jpg);
+    background-repeat: no-repeat; /* hace que la imagen no se repita */
+    background-position: center center; /* hace que la imagen se pocicione en el centro */
+    background-attachment: fixed;  /* hace que la imagen se vea piola */
+    background-size: cover; /* hace que la imagen sea responciva */
+	
+}
+.carousel-control-prev{
+ background: none; 
+}
+.carousel-control-next{
+    background: none;
+}
+.card-body{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+/* si tenes problema con el body cambialo por una clase*/
