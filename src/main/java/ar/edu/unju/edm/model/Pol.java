@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -18,7 +20,6 @@ import org.springframework.stereotype.Component;
 @Table (name="POLS")
 @Component
 public class Pol {
-	//pruebadea
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native", strategy="native")
@@ -59,6 +60,9 @@ public class Pol {
 	private String fotoEnlace2;
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace3;
+	@ManyToOne
+	@JoinColumn(name = "correo",referencedColumnName="idTurista")
+	private Turista turista;
 	public Pol() {
 		// TODO Auto-generated constructor stub
 	}
@@ -171,6 +175,14 @@ public class Pol {
 	}
 	public void setFotoEnlace3(String fotoEnlace3) {
 		this.fotoEnlace3 = fotoEnlace3;
+	}
+
+	public Turista getTurista() {
+		return turista;
+	}
+
+	public void setTurista(Turista turista) {
+		this.turista = turista;
 	}
 	
 }

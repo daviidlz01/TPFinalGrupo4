@@ -56,8 +56,11 @@ public class TuristasServiceMySQL implements ITuristasService {
 	@Override
 	public void modificarTurista(Turista turistaModificado) throws Exception {
 		// TODO Auto-generated method stub
-		Turista turistaAModificar = turistaDAO.findById(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));  
+		System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
+		Turista turistaAModificar = turistaDAO.findById(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
 		cambiarTurista(turistaModificado, turistaAModificar);
+		System.out.println("ccccccccccccccccccccccc");
 		turistaDAO.save(turistaAModificar);
 	}
 	private void cambiarTurista (Turista desde, Turista hacia) {
@@ -67,12 +70,27 @@ public class TuristasServiceMySQL implements ITuristasService {
 	hacia.setLatitud(desde.getLatitud());
 	hacia.setLongitud(desde.getLongitud());
 	}
-
 	@Override
 	public Turista encontrarUnTurista(String email) throws Exception {
 		// TODO Auto-generated method stub
 		return turistaDAO.findByEmail(email).orElseThrow(()->new Exception("El Turista no fue encontrado"));
 	}
+
+	@Override
+	public void modificarTurista2(Turista turistaModificado) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
+		Turista turistaAModificar = turistaDAO.findById(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
+		cambiarTurista2(turistaModificado, turistaAModificar);
+		System.out.println("ccccccccccccccccccccccc");
+		turistaDAO.save(turistaAModificar);
+	}
+	private void cambiarTurista2 (Turista desde, Turista hacia) {
+		hacia.setPuntos(desde.getPuntos());
+	}
+	
+	
 
 
 }

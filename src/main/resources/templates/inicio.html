@@ -21,33 +21,25 @@
 <body>
 	<section class="contenedor">
 		<div class="inicio">
-			<form th:action="@{/login}" method="post">
+			<form th:action="@{/login}" method="post" style="padding:10px">
 				<div class="form-floating col-md-3">
 					<img th:src="@{/img/logo.jpg}" class="logo" alt=""> <input
 						type="email" class="form-control" id="floatingInput"
-						placeholder="correo@ejemplo.com" name="correo"> <label
-						for="floatingInput">Ingrese email</label>
+						placeholder="Ingrese su correo" name="correo"> <label
+						for="floatingInput" style="text-align:border">Email</label>
 				</div>
 				<div class="form-floating col-md-3">
 					<input type="password" class="form-control" id="floatingPassword"
-						placeholder="Contraseña" name="password"> <label
-						for="floatingPassword">Ingrese su contraseña</label>
+						placeholder="Ingrese su contraseña" name="password"> <label
+						for="floatingPassword">Contraseña</label>
 				</div>
 				<div class="form-floating col-md-3">
-					<a href="#" style="text-decoration:none"> OLVIDASTE TU PASSWORD?</a> <br> <a href="/turista/mostrar"  style="text-decoration:none">
-						NO Tenes cuenta?</a>
+					 <a href="/turista/mostrar"  style="text-decoration:none;color:yellow">
+						Crear cuenta</a>
 				</div>
 				<div class="form-floating col-md-3">
 					<input type="submit" value="Ingresar"
 						class="btn btn-success btn-block">
-				</div>
-				<div class="form-floating col-md-3">
-					<input type="submit" value="Ingrese con gmail"
-						class="btn btn-danger btn-block">
-				</div>
-				<div class="form-floating col-md-3">
-					<input type="submit" value="Ingrese con faisbuk"
-						class="btn btn-primary btn-block">
 				</div>
 			</form>
 		</div>

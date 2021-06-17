@@ -6,18 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 @Entity
 @Component
-@Table(name = "Turistas")
+@Table(name = "Turistas",uniqueConstraints=
+@UniqueConstraint(columnNames = {"email"}))
 public class Turista {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Integer idTurista;
-	@Column
+	@Column(unique = true)
 	private String email;
 	@Column
 	private String password;

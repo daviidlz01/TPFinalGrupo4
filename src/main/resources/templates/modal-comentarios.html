@@ -63,16 +63,16 @@
 			
 			<div th:each="c : ${comments}">
 				<span th:if="${c.comentario != ''}">
-				<div class="row">
-						<div class="col-2">
-								<img th:src="@{/img/fondohome.jpg}" width="50" height="50" style="border-radius:50%">
-								<div th:text="${c.turista.nombre}"></div>
+						<div class="row">
+								<div class="col-2">
+										<img th:src="@{/img/fondohome.jpg}" width="50" height="50" style="border-radius:50%">
+										<div th:text="${c.turista.nombre}"></div>
+								</div>
+								<div class="col-9">
+									<div th:text="${c.comentario}"></div>
+									<div th:text="${c.pol.codigo}"></div>
+								</div>
 						</div>
-						<div class="col-9">
-							<div th:text="${c.comentario}"></div>
-							<div th:text="${c.pol.codigo}"></div>
-						</div>
-				</div>
 				</span>	
 				<br>
 			</div>

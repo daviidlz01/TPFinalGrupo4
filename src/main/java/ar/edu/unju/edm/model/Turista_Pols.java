@@ -1,5 +1,7 @@
 package ar.edu.unju.edm.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class Turista_Pols {
 	@Column
 	private Integer idTurista_Pols;
 	@ManyToOne
-	@JoinColumn(name = "idTurista")
+	@JoinColumn(name = "idTurista",referencedColumnName="idTurista")
 	private Turista turista;
 	@ManyToOne
 	@JoinColumn(name = "idPol")
@@ -71,5 +73,46 @@ public class Turista_Pols {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	
+	public int getValoracionGeneral(List<Turista_Pols> lista,Integer a) {
+		int cont=0,total=0,general;
+		for(int i=0;i<lista.size();i++) {
+			if(lista.get(i).getValoracion()!=0) {
+				if(lista.get(i).getPol().getCodigo()==a) {
+					total=total+lista.get(i).getValoracion();
+					cont++;
+				}
+			}
+		}
+		if(cont==0) {
+			cont=1;
+		}
+		general=total/cont;
+		return general;
+	}
+	public int getVerificarValoracion(List<Turista_Pols> lista,Integer a,Integer b) {
+		int total=0;
+		boolean band=true;
+		for(int i=0;i<lista.size() && band==true;i++) {
+				if(lista.get(i).getPol().getCodigo()==a) {
+					if(lista.get(i).getTurista().getIdTurista()==b) {
+						if(lista.get(i).getValoracion()>0 ) {
+							band=false;
+							total=1;
+						}
+					}
+				}
+		}
+		return total;
+	}
+	public int getVotosPols(List<Turista_Pols> lista,Integer a) {
+		int cont=0;
+		for(int i=0;i<lista.size();i++) {
+			if(lista.get(i).getValoracion()!=0) {
+				if(lista.get(i).getPol().getCodigo()==a) {
+					cont++;
+				}
+			}
+		}
+		return cont;
+	}
 }
