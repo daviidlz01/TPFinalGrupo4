@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet" type="text/css"
+	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet"
+	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/estilosmaxiif.css}">
+<title>Error</title>
+</head>
+<body>
+	<section class="contenedor">
+        <div class="formulario col-md-3">
+        <div class="tituloform"> <h3>Un error ha ocurrido</h3> </div>
+            <form>
+            	<div class="form-group">
+                    <label for="nombre" class="form-label">Correo duplicado</label>
+                    El correo que ingreso ya existe, por favor vuelva atras e ingrese otro
+                </div>
+    		</form>
+    	</div>
+    </section>		        
+</body>
+</html>

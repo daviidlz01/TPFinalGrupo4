@@ -28,9 +28,6 @@
                 <div class="form-group">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input class="form-control" type="text" name="nombre" id="nombre" th:field="*{nombre}" required maxlength="20">
-                    <div class="valid-tooltip">
-        				Looks good!
-      				</div>
                 </div>
                 <input type="hidden" th:field="*{idTurista}" th:if="${editMode}">
                 <div class="form-group">
