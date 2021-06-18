@@ -49,7 +49,9 @@
             </div>
     </div>
 	<div class="container"></div>
+
 	<h3 style="text-align:center;color:white;background:black;margin-top:10px;">Pols Generales</h3>
+
 		<div class="row">
 			<div th:each="p : ${pols}">
 						<div class="col-sm-6 ml-5">
@@ -90,8 +92,10 @@
 						</div>
 					</div>	
 		</div>
+
 		<br>
 	<div th:insert="layout/footer :: footer"></div>
+
 </body>
 <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
 	type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>

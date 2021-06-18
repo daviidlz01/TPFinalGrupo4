@@ -76,7 +76,9 @@ public class TuristaController {
 				LOGGER.info("METHOD: Esto va a dar un error");
 				model.addAttribute("unTurista", nuevoTurista);
 				model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
+
 				return("error");
+
 			}
 		}
 	}

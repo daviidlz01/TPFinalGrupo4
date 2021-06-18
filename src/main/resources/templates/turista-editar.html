@@ -3,8 +3,10 @@
 <head>
 <link th:rel="stylesheet" type="text/css"
 	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+
 <link th:rel="stylesheet" type="text/css"
 	th:href="@{/css/footerstyle.css}">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 
@@ -13,6 +15,7 @@
 <title>MiPerfil</title>
 </head>
 
+
 <body style="background-image: url(https://c1.wallpaperflare.com/preview/916/1/165/flame-north-jujuy-coya.jpg);background-repeat: no-repeat;background-position: center center;background-attachment: fixed; background-size: cover;">
 	
 <div th:insert="layout/header :: header"></div>
@@ -20,6 +23,7 @@
 <div class="card" style="background-color: rgba(0, 0, 0, 0.6);">	
 		<div class="col-12 card-header bg-warning">
 		<h3 class="text-center">Mi Perfil</h3>
+
 		</div>
 		<form th:object="${unTurista}" th:action="@{/turista/miperfil/editar}" method="post" class="col-12">
 				<div class="form-group">
@@ -61,6 +65,7 @@
                 	
                 <button type="submit" class="btn btn-warning  btn-block ">Modificar</button>
                 </div>
+
                 <div>
                 	<a
 						th:onclick="'javascript:confirmarEliminar(\''+*{idTurista}+'\');'">
@@ -98,6 +103,7 @@
 			</div>
 		</div>
 	<div th:insert="layout/footer :: footer"></div>
+
 </body>
 
 <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
@@ -107,6 +113,7 @@
 	<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
 		type="text/javascript"
 		src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 		function confirmarEliminar(id) {
 			$('#modalEliminar').modal('show');
@@ -118,4 +125,5 @@
 			window.location = "eliminarTurista/" + id;
 		}
 	</script>			
+
 </html>

@@ -70,7 +70,9 @@
 						th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}">Error</small>
 				</div>
 				<div class="form-group col-md-3">
+
 				<select th:field="*{turista.idTurista}" id="sel" style="visibility:hidden"
+
 									class="custom-select mt-3 mb-3 border-info" required>
 									<option th:value="${unTurista.idTurista}" name="idTurista"
 										th:text="${unTurista.nombre}"></option>
@@ -118,6 +120,7 @@
 									
 					</div>
 			</div>
+
 			
 				<details>
 					<summary>Desea agregar mas</summary>
@@ -126,6 +129,7 @@
 							<label for="file" class="col-sm-4 col-form-label" th:field="*{fotoEnlace2}">
 												</label>
 											<div class="col-sm-10" style="color:white">
+
 												<input type="file" name="file2" class="form-control-file"
 													id="file2"
 													accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg"
@@ -145,10 +149,12 @@
 											<img id="output3" style="padding-top: 2px; width: 146px;" />
 										</div>
 									
+
 					</div>
 					</div>	
 				</details>
 			
+
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<input type="submit" class="btn btn-success btn-block"
@@ -162,7 +168,9 @@
 		</form>
 		<!-- ---------------------------------------------------------------- -->
 		<br>
+
 		<h3 style="color:white">Informacion de Mis Pois</h3>
+
 		<br>
 		<div class="table-responsive">
 			<table class="table  table-light table-hover table-bordered">
@@ -195,7 +203,9 @@
 							th:onclick="'javascript:confirmarEliminar(\''+${po.codigo}+'\');'">
 								<i class="fa fa-trash-alt"></i>
 						</a></td>
+
 					</div>
+
 				</tr>
 			</table>
 		</div>
@@ -232,8 +242,9 @@
 				</div>
 			</div>
 		</div>
+
 		<h4 style="color:white">Visualizacion de de Mis Pois</h4>
-		<div>
+
 			<div class="row">
 					<div th:each="c : ${pols}">
 						<div  th:if="${unTurista == c.turista}">
@@ -284,8 +295,10 @@
 			</div>
 		</div>
 	</div>
+
 	<br>
 	<div th:insert="layout/footer :: footer"></div>
+
 	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
 		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
