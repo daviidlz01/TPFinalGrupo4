@@ -19,86 +19,79 @@
 <link rel="stylesheet" th:href="@{/css/footerstyle.css}">
 </head>
 <body>
-   
 
-    <footer>
-<div class="container-footer-all"> 
-<div class="container">
-    <div class="column1">
-        <h1>Mas informacion de la compañia</h1>
-        <p>tuviejatuviejatuviejtuvieja</p>
-
-
-</div>
-
-<div class="column2">
-
-    <h1>Redes Sociales</h1>
-
-    <div class="row">
-        <img src="fb.png">
-        <label> Siguenos en Facebook</label>
-
-    </div>
-    <div class="row">
-        <img src="twitter.png">
-        <label> Siguenos en Twitter</label>
-        
-    </div>
-    <div class="row">
-        <img src="ig.png">
-        <label> Siguenos en Instagram</label>
-        
-    </div>
-    <div class="row">
-        <img src="word.png">
-        <label> Siguenos en Wordpress</label>
-        
-    </div>
-    <div class="row">
-        <img src="flip.png">
-        <label> Siguenos en Flipboard</label>
-        
-    </div>
-</div>
-    <div class="column3">
+	<div class="pie">
+		<footer>
+			<div class="container-footer-all">
+				<div id="cont" class="container">
+					<div class="column1">
+						<h1>Mas informacion de la compañia</h1>
+						<p style="font-size:20px">Somos un grupo de jovenes emprendedores que buscan brindar a las personas sus experincias en esta linda provincia</p>
 
 
-        <h1>Informacion para contactarnos</h1>
+					</div>
 
-        <div class="row2">
-            <img src="casita.png">
-            <label>Viltipico 453,JUJUY - HUMAHUACA</label>
+					<div class="column2" id="redes">
 
-    </div>
-    <div class="row2">
-        <img src="tel.png">
-        <label>+54 9 388123456</label>
-        
-</div>
-<div class="row2">
-    <img src="correo.png">
-    <label>starbucks@gmail.com</label>
+						<h1>Redes Sociales</h1>
 
-    
-</div>
+						<div id="imagen" class="row">
+							<img th:src="@{/img/fb.png}"> <label><a href="#"> Siguenos en Facebook</a></label>
+
+						</div>
+						<div id="imagen" class="row">
+							<img th:src="@{/img/twitter.png}"> <label><a href="#"> Siguenos en Twitter</a></label>
+
+						</div>
+						<div id="imagen" class="row">
+							<img th:src="@{/img/ig.png}"> <label><a href="#">Siguenos en Instagram</a></label>
+
+						</div>
+						<div id="imagen" class="row">
+							<img th:src="@{/img/word.png}"> <label><a href="#">Siguenos en Wordpress</a></label>
+
+						</div>
+						<div id="imagen" class="row">
+							<img th:src="@{/img/flip.png}"> <label><a href="#"> Siguenos en Flipboard</a></label>
+
+						</div>
+					</div>
+					<div class="column3">
 
 
-</div>
-</div>
-<div class="container-footer">
-    <div class="footer">
-    <div class="copyright">
-         @ 2021 Todos los derechos reservados | Maxiis
-    </div>
-    <div class="informacion">
-    
-        <a href="">Informacion compañia</a> | <a href="">Privacidad y politica</a>  |<a href="">Terminos y condiciones</a> 
-    </div>
-</div>
-    </div>
-</div>
-    </footer>
-    
+						<h1>Informacion para contactarnos</h1>
+
+						<div id="contacto" class="row2">
+							<img th:src="@{/img/casita.png}"> <label>Viltipico 453,JUJUY -
+								HUMAHUACA</label>
+
+						</div>
+						<div id="contacto" class="row2">
+							<img th:src="@{/img/tel.png}"> <label>+54 9 388123456</label>
+
+						</div>
+						<div id="contacto" class="row2">
+							<img th:src="@{/img/correo.png}"> <label>starbucks@gmail.com</label>
+
+
+						</div>
+
+
+					</div>
+				</div>
+				<div class="container-footer">
+					<div class="footer">
+						<div class="copyright">@ 2021 Todos los derechos reservados
+							| Maxiis</div>
+						<div id="info" class="informacion">
+
+							<a href="">Informacion compañia</a> | <a href="">Privacidad y
+								politica</a> |<a href="">Terminos y condiciones</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>

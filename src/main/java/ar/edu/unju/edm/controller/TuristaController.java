@@ -76,7 +76,9 @@ public class TuristaController {
 				LOGGER.info("METHOD: Esto va a dar un error");
 				model.addAttribute("unTurista", nuevoTurista);
 				model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
-				return("turista");
+
+				return("error");
+
 			}
 		}
 	}
@@ -122,6 +124,6 @@ public class TuristaController {
 		catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());
 		}			
-		return "redirect:/turista/mostrar";
+		return "redirect:/home";
 	}
 }
