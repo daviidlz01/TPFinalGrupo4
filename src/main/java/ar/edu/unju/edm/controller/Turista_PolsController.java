@@ -37,7 +37,7 @@ public class Turista_PolsController {
 		model.addAttribute("comments",t_pService.obtenerTodosTurista_pols());
 		return "comentarios";
 	}
-	@GetMapping("/pol/comentarios/{codigo}")
+	@GetMapping("/pol/comentarios/{codigo}/algo")
 	public String realizarComentario(Model model, @PathVariable(name="codigo") Integer codigo,Authentication authentication)throws Exception {
 		Turista_Pols tp=new Turista_Pols();
 		try {
@@ -48,17 +48,37 @@ public class Turista_PolsController {
 			UserDetails userTurista = (UserDetails) authentication.getPrincipal();
 			model.addAttribute("unTurista",turistaService.encontrarUnTurista(userTurista.getUsername()));
 			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
+			model.addAttribute("unPol",tp.getPol());
+			model.addAttribute("valora",tp.getValoracionGeneral(t_pService.obtenerTodosTurista_pols(),tp.getPol().getCodigo()));
+			model.addAttribute("verificar",tp.getVerificarValoracion(t_pService.obtenerTodosTurista_pols(), tp.getPol().getCodigo(), turistaService.encontrarUnTurista(userTurista.getUsername()).getIdTurista()));
+			model.addAttribute("cont",tp.getVotosPols(t_pService.obtenerTodosTurista_pols(),tp.getPol().getCodigo()));
 		}
 		catch (Exception e){
 			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
 		}
 		model.addAttribute("comments",t_pService.obtenerTodosTurista_pols());
-		return "modal-comentarios";
+		return "pol-detalles";
 	}
 	@PostMapping("/pol/comentarios/realizado")
-	public String guardarComentario(@ModelAttribute("comentarios") Turista_Pols comentario,Model model){
+	public String guardarComentario(@ModelAttribute("comentarios") Turista_Pols comentario,@ModelAttribute("unTurista") Turista unturista,@ModelAttribute("unPol") Pol unpol,Model model) throws Exception{
 		t_pService.guardarTurista_pols(comentario);
+		unturista.setPuntos(5+unturista.getPuntos());
+		Integer codigo=comentario.getPol().getCodigo();
+		String cadena=String.valueOf(codigo);
+		turistaService.modificarTurista2(unturista);
 		model.addAttribute("comments",t_pService.obtenerTodosTurista_pols());
-		return ("redirect:/pol/comentarios");
+		model.addAttribute("unTurista", new Turista());	
+		return ("redirect:/pol/comentarios/"+cadena+"/algo");
+	}
+	@PostMapping("/pol/valoraciones/realizado")
+	public String guardarComentario2(@ModelAttribute("comentarios") Turista_Pols comentario,@ModelAttribute("unTurista") Turista unturista,@ModelAttribute("unPol") Pol unpol,Model model) throws Exception{
+		t_pService.guardarTurista_pols(comentario);
+		unturista.setPuntos(8+unturista.getPuntos());
+		Integer codigo=comentario.getPol().getCodigo();
+		String cadena=String.valueOf(codigo);
+		turistaService.modificarTurista2(unturista);
+		model.addAttribute("comments",t_pService.obtenerTodosTurista_pols());
+		model.addAttribute("unTurista", new Turista());	
+		return ("redirect:/pol/comentarios/"+cadena+"/algo");
 	}
 }

@@ -60,6 +60,7 @@ public class PolServiceMySQL implements IPolService {
 		hacia.setNumeroCasa(desde.getNumeroCasa());
 		hacia.setSitioWeb(desde.getSitioWeb());
 		hacia.setFotoEnlace(desde.getFotoEnlace());
+		hacia.setTurista(desde.getTurista());
 	}
 
 }

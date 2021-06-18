@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet" type="text/css"
+	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/polStyle.css}" type="text/css">
+<link th:rel="stylesheet"
+	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<meta charset="UTF-8">
+<title>Mas informacion</title>
+</head>
+<body>
+
+	<div th:insert="layout/header :: header"></div>
+
+	<div class="container">
+		<br>
+		<h3>Detalles</h3>
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-3">
+						<div th:id="'pol'+${unPol.codigo}" class="carousel slide" data-interval="false" th:object="${unPol}">
+							<div class="carousel-inner">
+   							 <div class="carousel-item active">
+		  						<img th:src="*{'data:;base64,'+fotoEnlace}" class="card-img-top" alt="imagen de producto" style="height: 200px;">
+		  					 </div>
+		  					 <div class="carousel-item">
+		  					 	<div th:if="${unPol.fotoEnlace2}">
+									<img th:src="*{'data:;base64,'+fotoEnlace2}" class="card-img-top" alt="imagen de producto" style="height: 200px;">
+								</div>
+		  					</div>
+		  					</div>
+		  					<a th:if="${unPol.fotoEnlace2}"class="carousel-control-prev" th:href="*{'#pol'+codigo}" role="button" data-slide="prev">
+							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							    <span class="sr-only">Previous</span>
+							</a>
+							<a th:if="${unPol.fotoEnlace2}" class="carousel-control-next" th:href="*{'#pol'+codigo}" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>		
+		  				</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-9">
+					<form id="formProducto1" th:object="${comentarios}" th:action="@{/pol/valoraciones/realizado}" method="post"> <!-- este era el form-acordate aca hace la valoracion, hace otro boton -->
+					<div class="form-group row">
+						<input type="hidden" id="numdoc" th:field="*{pol.codigo}"
+							class="form-control"> <label for="numdoc"
+							class="col-sm-2 col-md-2 col-form-label">Nombre</label>
+						<div class="col-sm-12 col-md-10">
+							<input type="text" id="numdoc" th:field="*{pol.nombre}"
+								class="form-control" disabled>
+						</div>
+						<label for="desc"
+							class="col-sm-2 col-md-2 col-form-label">Descripcion</label>
+						<div class="col-sm-12 col-md-10">
+							<input type="text" id="desc" th:field="*{pol.descripcion}"
+								class="form-control" disabled>
+						</div>
+						<label for="eti"
+							class="col-sm-2 col-md-2 col-form-label">Etiqueta</label>
+						<div class="col-sm-12 col-md-10">
+							<input type="text" id="eti" th:field="*{pol.etiqueta}"
+								class="form-control" disabled>
+						</div>
+						<label for="dir"
+							class="col-sm-2 col-md-2 col-form-label">Direcciones</label>
+						<div class="col-sm-12 col-md-10">
+							<details>
+								<summary>Direcciones</summary>
+									<div class="form-row">
+										<div class="form-group col-6 col-md-3">
+											<label for="nombrepol">Calle</label> <input type="text"
+											class="form-control" id="nombrepol" th:field="*{pol.calle}" disabled>
+										</div>
+										<div class="form-group col-6 col-md-3">
+											<label for="barriopol">Barrio</label> <input type="text"
+											class="form-control" id="barriopol" th:field="*{pol.barrio}"  disabled>
+										</div>
+										<div class="form-group col-6 col-md-3">
+											<label for="numeropol">Numero</label> <input type="number"
+											class="form-control" id="numeropol" th:field="*{pol.numeroCasa}"  disabled>
+										</div>
+										<div class="form-group col-6 col-md-3">
+											<label for="localidadpol">Localidad</label> <input type="text"
+											class="form-control" id="localidadpol" th:field="*{pol.localidad}"  disabled>
+										</div>
+									</div>
+							</details>
+						</div>
+						
+						<input type="hidden" th:field="${unTurista.idTurista}">
+						<input type="hidden" th:field="${unTurista.puntos}">
+						<label for="comenta" class="col-sm-2 col-form-label">Valora</label>
+						<div class="col-sm-10">
+							<div class="card-text">
+								  <p class="clasificacion">
+								    <input id="radio1" type="radio" name="estrellas" th:field="*{valoracion}" value="5" required><!--
+								    --><label class="estrella" for="radio1">★</label><!--
+								    --><input class="estrella" id="radio2" type="radio" name="estrellas" th:field="*{valoracion}" value="4" required><!--
+								    --><label class="estrella" for="radio2">★</label><!--
+								    --><input class="estrella" id="radio3" type="radio" name="estrellas" th:field="*{valoracion}" value="3" required><!--
+								    --><label class="estrella" for="radio3">★</label><!--
+								    --><input class="estrella" id="radio4" type="radio" name="estrellas" th:field="*{valoracion}" value="2" required><!--
+								    --><label class="estrella" for="radio4">★</label><!--
+								    --><input class="estrella" id="radio5" type="radio" name="estrellas" th:field="*{valoracion}" value="1" required><!--
+								    --><label class="estrella" for="radio5">★</label>
+								  </p>		
+							</div>
+						</div>
+						<input type="hidden" th:field="*{pol.codigo}">
+						<input type="hidden" th:field="*{turista}" name="nombre">
+						<input type="hidden" th:field="*{valoracion}">
+						<input type="hidden" th:object="${valora}" th:value="${valora}">
+						<input type="hidden" th:object="${verificar}" th:value="${verificar}">
+						<input type="hidden" th:field="${unTurista.idTurista}">
+						
+						
+							
+								<div th:object="${verificar}" th:if="${verificar==0}">
+										<button th:if="${comentarios.valoracion == 0 or comentarios.valoracion != null}" type="submit" class="btn btn-danger">Valorar</button>
+								</div>
+								<div th:object="${verificar}" th:if="${verificar!=0}">
+									<h6> ¡ Ya has valorado este pol !</h6>
+								</div>
+								<div class="col-sm-1 left">
+							<div style="visibility:hidden">
+								<select th:field="*{turista.idTurista}"
+									class="custom-select mt-3 mb-3 border-info" required>
+									<option th:value="${unTurista.idTurista}" name="idTurista"
+										th:text="${unTurista.nombre}"></option>
+								</select>
+							</div>
+						</div>
+						
+					</div>
+					</form><!-- este era el form-acordate aca hace la valoracion -->
+					<!-- Termina el form -->			
+				</div>
+			</div>	
+		<br>
+		<h4>Valoracion general</h4>
+		<div th:object="${valora}">
+							<div class="card-text">
+								  <p class="clasificacion">
+								    <input id="radio1" type="radio" name="estrellas" th:if="${valora == 5}" checked><!--
+								    --><label class="estrella" for="radio1">★</label><!--
+								    --><input class="estrella" id="radio2" type="radio" name="estrellas" th:if="${valora == 4}" checked><!--
+								    --><label class="estrella" for="radio2">★</label><!--
+								    --><input class="estrella" id="radio3" type="radio" name="estrellas" th:if="${valora == 3}" checked><!--
+								    --><label class="estrella" for="radio3">★</label><!--
+								    --><input class="estrella" id="radio4" type="radio" name="estrellas" th:if="${valora == 2}" checked><!--
+								    --><label class="estrella" for="radio4">★</label><!--
+								    --><input class="estrella" id="radio5" type="radio" name="estrellas" th:if="${valora == 1}" checked><!--
+								    --><label class="estrella" for="radio5">★</label>
+								  </p>		
+							</div>
+		</div>
+		<div th:text="${'Valoracion general: '+valora+ ' estrellas'}">Hola</div>
+		<div th:text="${'Votos totales: '+cont}">Hola</div>
+		<h4>Comentarios</h4>
+		<div>
+			<div class="row">
+				<div class="col-2 col-md-2 col-lg-1">
+					<img th:src="@{/img/fondohome.jpg}" width="50" height="50"
+								style="border-radius: 50%">
+				</div>
+				<div class="col-10 col-md-10 col-lg-11">
+					<form id="formProducto" th:object="${comentarios}" th:action="@{/pol/comentarios/realizado}" method="post">
+						<div class="row">
+							<textarea class="col-12  " rows="3" placeholder="Ingrese un nuevo comentario publico" th:field="*{comentario}"></textarea>
+						</div>
+						<input type="hidden" th:field="${unTurista.idTurista}">
+						<input type="hidden" th:field="${unTurista.puntos}">
+						<div class="float-right row">
+								<input type="hidden" id="numdoc" th:field="*{pol.codigo}" class="form-control">
+								<select th:field="*{turista.idTurista}" id="sel1"  style="visibility:hidden"
+									class="custom-select mt-3 mb-3 border-info" required>
+									<option th:value="${unTurista.idTurista}" name="idTurista"
+										th:text="${unTurista.nombre}"></option>
+								</select>
+						</div>
+						<div class="float-left row">
+						<button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+					</form>	
+				</div>
+			</div>
+		</div>
+		<div th:each="c : ${comments}">
+			<div th:if="${c.comentario != ''}">
+				<div th:if="${c.comentario}">
+					<div  th:if="${unPol.codigo == c.pol.codigo}">
+						<div class="row" style="padding:10px;">
+							<div class="col-2 col-md-2 col-lg-1">
+								<img th:src="@{/img/fondohome.jpg}" width="60" height="60"
+									style="border-radius: 200%">
+								
+							</div>
+							<div class="row col-10 col-md-10 col-lg-11">
+								<div class="col-12 col-md-12">
+									<div th:text="${c.turista.nombre}"></div>
+								</div>
+								<div class="w-100"></div>
+								<div class="col-12 col-md-12">
+									<textarea class="col-12" rows="2" th:text="${c.comentario}" disabled ></textarea>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>	
+			</div> 
+		</div>
+	</div>
+</body>
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
+	type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
+	type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
+<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
+	type="text/javascript"
+	src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+        function hide(){
+          var elem = document.getElementById('sel1');
+          elem.style.display = 'none';
+        }
+
+        function show(){
+          var elem = document.getElementById('sel1');
+          elem.style.display = 'inline';
+        }
+
+</script>	
+</html>

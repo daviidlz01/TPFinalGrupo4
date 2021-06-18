@@ -10,6 +10,7 @@ public interface ITuristasService {
 	public Turista encontrarUnTurista(int idTurista) throws Exception;
 	public Turista encontrarUnTurista(String email) throws Exception;
 	public void modificarTurista(Turista turistaModificado) throws Exception;
+	public void modificarTurista2(Turista turistaModificado) throws Exception;
 	public void eliminarTurista(int idTurista) throws Exception;
 	List<Turista> obtenerTodosTuristas();
 

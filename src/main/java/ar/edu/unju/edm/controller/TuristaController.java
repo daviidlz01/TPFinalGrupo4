@@ -57,6 +57,8 @@ public class TuristaController {
 		
 		if (resultado.hasErrors()) 
 		{
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
+			LOGGER.info("METHOD: Esto va a dar un error");
 			model.addAttribute("unTurista", nuevoTurista);
 			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
 			return("turista");
@@ -64,9 +66,18 @@ public class TuristaController {
 		else 
 		{
 			LOGGER.info("METHOD: ingresando el metodo Guardar");
-			turistaService.guardarTurista(nuevoTurista);
-			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
-			return "redirect:/home";
+			try {
+				turistaService.guardarTurista(nuevoTurista);
+				model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
+				return "redirect:/home";
+			}
+			catch (Exception e){
+				System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
+				LOGGER.info("METHOD: Esto va a dar un error");
+				model.addAttribute("unTurista", nuevoTurista);
+				model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
+				return("turista");
+			}
 		}
 	}
 	
