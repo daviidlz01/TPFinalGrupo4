@@ -2,10 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link th:rel="stylesheet" type="text/css"
-
 	th:href="@{/css/footerstyle.css}">
 <link th:rel="stylesheet" type="text/css"
-
 	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 	<link rel="stylesheet" th:href="@{/css/polStyle.css}" type="text/css">
 <link th:rel="stylesheet"
@@ -22,13 +20,11 @@
 <meta charset="UTF-8">
 <title>Mas informacion</title>
 </head>
-
 <body style="background-image: url(https://noticias.unju.edu.ar/noticias/serv/notis/2151Yungas.jpg);background-repeat: no-repeat;background-position: center center;background-attachment: fixed; background-size: cover;">
 
 	<div th:insert="layout/header :: header"></div>
 
 	<div class="container" style="background-color: rgba(0, 0, 0, 0.65);color:white">
-
 		<br>
 		<h3>Detalles</h3>
 			<div class="row">
@@ -56,9 +52,7 @@
 				</div>
 				<div class="col-12 col-sm-12 col-md-9">
 					<form id="formProducto1" th:object="${comentarios}" th:action="@{/pol/valoraciones/realizado}" method="post"> <!-- este era el form-acordate aca hace la valoracion, hace otro boton -->
-
 					<div class="form-group row" id="detalles">
-
 						<input type="hidden" id="numdoc" th:field="*{pol.codigo}"
 							class="form-control"> <label for="numdoc"
 							class="col-sm-2 col-md-2 col-form-label">Nombre</label>
@@ -123,22 +117,11 @@
 								  </p>		
 							</div>
 						</div>
-						<input type="hidden" th:field="*{pol.codigo}">
-						<input type="hidden" th:field="*{turista}" name="nombre">
-						<input type="hidden" th:field="*{valoracion}">
-						<input type="hidden" th:object="${valora}" th:value="${valora}">
-						<input type="hidden" th:object="${verificar}" th:value="${verificar}">
-						<input type="hidden" th:field="${unTurista.idTurista}">
-						
-						
-							
 								<div th:object="${verificar}" th:if="${verificar==0}">
 										<button th:if="${comentarios.valoracion == 0 or comentarios.valoracion != null}" type="submit" class="btn btn-danger">Valorar</button>
 								</div>
 								<div th:object="${verificar}" th:if="${verificar!=0}">
-
 									<h6 style="color:yellow"> ¡ Ya has valorado este pol !</h6>
-
 								</div>
 								<div class="col-sm-1 left">
 							<div style="visibility:hidden">
@@ -156,9 +139,7 @@
 				</div>
 			</div>	
 		<br>
-
 		<h4 style="color:#3CBC8D">Valoracion general</h4>
-
 		<div th:object="${valora}">
 							<div class="card-text">
 								  <p class="clasificacion">
@@ -212,16 +193,14 @@
 					<div  th:if="${unPol.codigo == c.pol.codigo}">
 						<div class="row" style="padding:10px;">
 							<div class="col-2 col-md-2 col-lg-1">
-
 								<div class="col-12 col-md-12">
-									<div th:text="${c.turista.nombre}" style="visibility:hidden"></div>
+									<div style="visibility:hidden">a</div>
 								</div>
 								<div class="w-100"></div>
 								<div class="col-12 col-md-12">
 								<img th:src="@{/img/fondohome.jpg}" width="55" height="55"
 									style="border-radius: 200%">
 								</div>
-
 							</div>
 							<div class="row col-10 col-md-10 col-lg-11">
 								<div class="col-12 col-md-12">
@@ -246,17 +225,4 @@
 <script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
 	type="text/javascript"
 	src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-        function hide(){
-          var elem = document.getElementById('sel1');
-          elem.style.display = 'none';
-        }
-
-        function show(){
-          var elem = document.getElementById('sel1');
-          elem.style.display = 'inline';
-        }
-
-</script>	
 </html>

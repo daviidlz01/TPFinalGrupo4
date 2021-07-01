@@ -1,19 +1,24 @@
 package ar.edu.unju.edm.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.stereotype.Component;
 @Entity
 @Component
 @Table(name = "Turistas",uniqueConstraints=
 @UniqueConstraint(columnNames = {"email"}))
-public class Turista {
+public class Turista implements Comparable<Turista>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +29,10 @@ public class Turista {
 	@Column
 	private String password;
 	@Column
+	@Pattern(regexp="[A-Za-z' ']+",message="Solo se permiten letras")
 	private String nombre;
 	@Column
+	@Pattern(regexp="[A-Za-z' ']+",message="Solo se permiten letras")
 	private String apellido;
 	@Column
 	private String paisPro;
@@ -35,7 +42,13 @@ public class Turista {
 	private double latitud;
 	@Column
 	private double longitud;
-	
+	@Column
+	private String activo;
+	@OneToMany(mappedBy="turista",cascade=CascadeType.ALL)
+	private List<Turista_Pols> turista_pols;
+	public Turista() {
+		// TODO Auto-generated constructor stub
+	}
 	public Turista(Integer idTurista, String email, String password, String nombre, String apellido, String paisPro,
 			int puntos, double latitud, double longitud) {
 		super();
@@ -64,12 +77,7 @@ public class Turista {
 
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
-	}
-
-	public Turista() {
-		// TODO Auto-generated constructor stub
-	}
-	
+	}	
 	public Integer getIdTurista() {
 		return idTurista;
 	}
@@ -112,6 +120,14 @@ public class Turista {
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
+	public String getActivo() {
+		return activo;
+	}
+
+	public void setActivo(String activo) {
+		this.activo = activo;
+	}
+
 	public Turista(Integer idTurista, String email, String password, String nombre, String apellido, String paisPro,
 			int puntos) {
 		super();
@@ -187,6 +203,17 @@ public class Turista {
 		if (puntos != other.puntos)
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Turista o) {
+		if (this.puntos == o.getPuntos()) {
+            return 0;
+        } else if (this.puntos > o.getPuntos()) {
+            return 1;
+        } else {
+            return -1;
+        }
 	}
 	
 	

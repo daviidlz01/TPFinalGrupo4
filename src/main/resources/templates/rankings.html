@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet" type="text/css"
+	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/css/footerstyle.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>	
+<meta charset="UTF-8">
+<title>Rankings</title>
+</head>
+<body style="background-image: url(https://www.argentinaenviaje.com/wp-content/uploads/2020/08/Jujuy-Argentina-1.jpg);background-repeat: no-repeat;background-position: center center;background-attachment: fixed; background-size: cover;">
+	<div th:insert="layout/header :: header"></div>
+	<div class="container" style="
+    background-color: rgba(0, 0, 0, 0.65);padding:10px;">
+        <h3 style="text-align:center;color:white">Turistas con mas puntos</h3>
+		<div class="table-responsive">
+			<table class="table  table-light table-hover table-bordered">
+				<tr class="bg-warning">
+					<th>Nombre</th>
+					<th>Pais de procedencia</th>
+					<th>Puntos</th>
+				</tr>
+				<tr th:if="${rankings.empty}">
+					<td colspan="2">No hay turistas</td>
+				<tr th:each="tu : ${rankings}">
+					<td th:if="${#authentication.getPrincipal().getUsername()==tu.email}" style="background-color:rgba(255, 78, 40, 0.7)" th:text="${tu.nombre+' '+tu.apellido}" ></td>
+					<td th:unless="${#authentication.getPrincipal().getUsername()==tu.email}" th:text="${tu.nombre+' '+tu.apellido}" ></td>
+					<td th:text="${tu.paisPro}"></td>
+					<td th:text="${tu.puntos}"></td>
+				</tr>
+			</table>
+		</div>
+		<h3 style="text-align:center;color:white">Pois mas puntuados</h3>
+		<div class="table-responsive">
+			<table class="table  table-light table-hover table-bordered">
+				<tr class="bg-warning">
+					<th>Nombre</th>
+					<th>Descripcion</th>
+					<th>Estrellas</th>
+					<th>Ir al punto de interes</th>
+				</tr>
+				<tr th:if="${rankings2.empty}">
+					<td colspan="2">No hay Pois</td>
+				<tr th:each="tu : ${rankings2}">
+					<td th:text="${tu.nombre}"></td>
+					<td th:text="${tu.descripcion}"></td>
+					<td th:text="${tu.estrellas}"></td>
+					<td class="text-center">
+					<a class="mr-3" href="#" th:href="@{'/pol/comentarios/'+${tu.codigo}+'/algo/'}">
+					<button type="button" class="btn btn-danger">Ir al poi</button>
+					</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
+		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
+		type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
+	<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
+		type="text/javascript"
+		src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

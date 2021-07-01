@@ -3,10 +3,8 @@
 <head>
 <link th:rel="stylesheet" type="text/css"
 	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
-
 <link th:rel="stylesheet" type="text/css"
 	th:href="@{/css/footerstyle.css}">
-
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 
@@ -15,25 +13,27 @@
 <title>MiPerfil</title>
 </head>
 
-
-<body style="background-image: url(https://c1.wallpaperflare.com/preview/916/1/165/flame-north-jujuy-coya.jpg);background-repeat: no-repeat;background-position: center center;background-attachment: fixed; background-size: cover;">
+<body style="background-image: url(https://www.visitingargentina.com/wp-content/uploads/2017/05/jujuy.jpg);background-repeat: no-repeat;background-position: center center;background-attachment: fixed; background-size: cover;">
 	
 <div th:insert="layout/header :: header"></div>
 <div class="container mt-3">
 <div class="card" style="background-color: rgba(0, 0, 0, 0.6);">	
 		<div class="col-12 card-header bg-warning">
 		<h3 class="text-center">Mi Perfil</h3>
-
 		</div>
 		<form th:object="${unTurista}" th:action="@{/turista/miperfil/editar}" method="post" class="col-12">
 				<div class="form-group">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input class="form-control" type="text" name="nombre" id="nombre" th:field="*{nombre}" required maxlength="20">
+                    <small class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error</small>
                 </div>
                 <input type="hidden" th:field="*{idTurista}">
                 <div class="form-group">
                     <label for="apellido" class="form-label">Apellido</label>
                     <input class="form-control" type="text" name="apellido" id="apellido"  th:field="*{apellido}" required maxlength="20">
+                    <small class="form-text text-danger"
+						th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error</small>
                 </div>
                 <div class="form-group">
                     <label for="email" class="form-label">Email</label>
@@ -65,12 +65,10 @@
                 	
                 <button type="submit" class="btn btn-warning  btn-block ">Modificar</button>
                 </div>
-
-                <div>
-                	<a
-						th:onclick="'javascript:confirmarEliminar(\''+*{idTurista}+'\');'">
-						<i class="fa fa-trash-alt"></i>
-					</a>
+                <br>
+                <div class="col-4 text-right offset-4">
+                	 <button type="button" class="btn btn-danger  btn-block" th:onclick="'javascript:confirmarEliminar(\''+*{idTurista}+'\');'">Inhabilitar cuenta</button>
+                	
                 </div>
 		</form>
 </div>
@@ -90,20 +88,19 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<h6>¿Estas seguro de eliminar el Pol?</h6>
+						<h6>¿Estas seguro de inhabilitar su cuenta?</h6>
 					</div>
 					<input type="hidden" id="identificadorTurista" name="codigo" />
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancelar</button>
 						<button type="button" class="btn btn-primary"
-							th:onclick="eliminarTurista()">Eliminar Pol</button>
+							th:onclick="eliminarTurista()">Inhabilitar cuenta</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	<div th:insert="layout/footer :: footer"></div>
-
 </body>
 
 <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
@@ -113,7 +110,6 @@
 	<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
 		type="text/javascript"
 		src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
 		function confirmarEliminar(id) {
 			$('#modalEliminar').modal('show');
@@ -124,6 +120,5 @@
 			var id = $("#identificadorTurista").val();
 			window.location = "eliminarTurista/" + id;
 		}
-	</script>			
-
+	</script>
 </html>

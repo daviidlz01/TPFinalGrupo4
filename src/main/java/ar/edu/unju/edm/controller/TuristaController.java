@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,21 +17,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.ITuristasService;
-@Qualifier("TuristasServiceMySQL")
 @Controller
 public class TuristaController {
 	private static final Log LOGGER = LogFactory.getLog(TuristaController.class);
 	
 	@Autowired
 	ITuristasService turistaService;
+	//ESTA PARTE ES LA DE CREAR CUENTA
 	@GetMapping("/turista/mostrar")
 	public String cargarTurista(Model model) {
 		model.addAttribute("unTurista", turistaService.crearTurista());
-		model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
 		//UserDetails userTurista = (UserDetails) authentication.getPrincipal();
 		//System.out.println(userTurista.getUsername());
 		return("turista");
 	}
+	//ESTA ES LA PARTE DE MIPERFIL DONDE PUEDO MODIFICAR SUS DATOS
 	@GetMapping("/turista/miperfil")
 	public String miPerfilTurista(Model model,Authentication authentication)throws Exception{
 		UserDetails userTurista = (UserDetails) authentication.getPrincipal();
@@ -41,23 +40,33 @@ public class TuristaController {
 		return "turista-editar";
 	}
 	@PostMapping("/turista/miperfil/editar")
-	public String miPerfilTuristaModificar(@ModelAttribute("unTurista") Turista turistaModificado, Model model){
-		try {
-			turistaService.modificarTurista(turistaModificado);
-			model.addAttribute("unTurista", new Turista());				
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
+	public String miPerfilTuristaModificar(@Valid @ModelAttribute("unTurista") Turista turistaModificado, BindingResult resultado, Model model) throws Exception{
+		if (resultado.hasErrors()) 
+		{
+			LOGGER.error("METHOD: Esto va a dar un error");
 			model.addAttribute("unTurista", turistaModificado);
+			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
+			return("turista-editar");
 		}
-		return "redirect:/turista/miperfil";
+		else
+		{
+			try {
+				turistaService.modificarTurista(turistaModificado);
+				model.addAttribute("unTurista", new Turista());				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				turistaService.modificarTurista(turistaModificado);
+				model.addAttribute("formUsuarioErrorMessage",e.getMessage());
+				model.addAttribute("unTurista", turistaModificado);
+			}
+			return "redirect:/turista/miperfil";
+		}
 	}
 	@PostMapping("/turista/guardar")
 	public String guardarNuevoTurista(@Valid @ModelAttribute("unTurista") Turista nuevoTurista, BindingResult resultado ,Model model) {
 		
 		if (resultado.hasErrors()) 
 		{
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
 			LOGGER.info("METHOD: Esto va a dar un error");
 			model.addAttribute("unTurista", nuevoTurista);
 			model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
@@ -67,59 +76,27 @@ public class TuristaController {
 		{
 			LOGGER.info("METHOD: ingresando el metodo Guardar");
 			try {
+				nuevoTurista.setActivo("SI");
 				turistaService.guardarTurista(nuevoTurista);
-				model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
 				return "redirect:/home";
 			}
 			catch (Exception e){
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
 				LOGGER.info("METHOD: Esto va a dar un error");
 				model.addAttribute("unTurista", nuevoTurista);
-				model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
-
 				return("error");
 
 			}
 		}
 	}
-	
-	@GetMapping("/turista/editar/{idTurista}")
-	public String editarTurista(Model model, @PathVariable(name="idTurista") int idTurista) throws Exception {
-		try {
-			Turista turistaEncontrado = turistaService.encontrarUnTurista(idTurista);
-			model.addAttribute("unTurista", turistaEncontrado);	
-			model.addAttribute("editMode", "true");
-		}
-		catch (Exception e) {
-			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
-			model.addAttribute("unTurista", turistaService.crearTurista());
-			model.addAttribute("editMode", "false");
-		}
-		model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
-		return("turista");
-	}
-	
-	@PostMapping("/turista/modificar")
-	public String modificarTurista(@ModelAttribute("unTurista") Turista turistaModificado, Model model) {
-		try {
-			turistaService.modificarTurista(turistaModificado);
-			model.addAttribute("unTurista", new Turista());				
-			model.addAttribute("editMode", "false");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			model.addAttribute("formUsuarioErrorMessage",e.getMessage());
-			model.addAttribute("unTurista", turistaModificado);
-			model.addAttribute("editMode", "true");
-		}
-		model.addAttribute("turistas",turistaService.obtenerTodosTuristas());
-		return "redirect:/turista/mostrar";
-	}
-
+	//ESTA PARTE INHABILITA EL TURISTA(NO LO BORRA)
 	@GetMapping("/turista/eliminarTurista/{idTurista}")
 	public String eliminarTurista(Model model, @PathVariable(name="idTurista") int id) {
 		LOGGER.info("METHOD: ingresando el metodo Eliminar");
 		try {
-			turistaService.eliminarTurista(id);		
+			Turista turistaEncontrado = turistaService.encontrarUnTurista(id);
+			turistaService.modificarTurista3(turistaEncontrado);
+			model.addAttribute("unTurista", new Turista());				
+			
 		}
 		catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());

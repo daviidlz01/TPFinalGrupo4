@@ -2,18 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link th:rel="stylesheet" type="text/css"
-	th:href="@{/css/footerstyle.css}">
-<link th:rel="stylesheet" type="text/css"
 	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
-<link th:rel="stylesheet"
-	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
-<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/css/footerstyle.css}">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>	
 <meta charset="UTF-8">
 <title>Pol</title>
 </head>
@@ -64,15 +59,29 @@
 						th:errors="*{numeroCasa}">Error</small>
 				</div>
 				<div class="form-group col-md-3">
-					<label for="localidadpol">Localidad</label> <input type="text"
-						class="form-control" id="localidadpol" th:field="*{localidad}" required>
+					<label for="localidadpol">Localidad</label>
+					<select id="etiquetapol"
+						class="form-control" th:field="*{localidad}">
+						<option value="--Seleccione la localidad--" selected disabled>-- Seleccione una etiqueta --</option>
+						<option value="Abra Pampa">Abra Pampa</option>
+						<option value="Aguas Calientes">Aguas Calientes</option>
+						<option value="Humahuaca">Humahuaca</option>
+						<option value="Purmamarca">Purmamarca</option>
+						<option value="Perico">Perico</option>
+						<option value="San Salvador de Jujuy">San Salvador de Jujuy</option>
+						<option value="Susques">Susques</option>
+						<option value="Tilcara">Tilcara</option>
+						<option value="Tumbaya">Tumbaya</option>
+						<option value="Valle Grande">Valle Grande</option>
+						<option value="Volcan">Volcan</option>
+						<option value="Yavi">Yavi</option>
+						<option value="Yala">Yala</option>
+					</select> 
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}">Error</small>
 				</div>
 				<div class="form-group col-md-3">
-
 				<select th:field="*{turista.idTurista}" id="sel" style="visibility:hidden"
-
 									class="custom-select mt-3 mb-3 border-info" required>
 									<option th:value="${unTurista.idTurista}" name="idTurista"
 										th:text="${unTurista.nombre}"></option>
@@ -110,7 +119,7 @@
 						<label for="file" class="col-sm-4 col-form-label" th:field="*{fotoEnlace}" >
 										</label>
 										<div class="col-sm-10" style="color:white">
-											<input type="file" name="file"  th:onclick="'javascript:a'"
+											<input type="file" name="file"
 											class="form-control-file" required
 												id="file"
 												accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg"
@@ -120,7 +129,6 @@
 									
 					</div>
 			</div>
-
 			
 				<details>
 					<summary>Desea agregar mas</summary>
@@ -129,7 +137,6 @@
 							<label for="file" class="col-sm-4 col-form-label" th:field="*{fotoEnlace2}">
 												</label>
 											<div class="col-sm-10" style="color:white">
-
 												<input type="file" name="file2" class="form-control-file"
 													id="file2"
 													accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg"
@@ -149,12 +156,10 @@
 											<img id="output3" style="padding-top: 2px; width: 146px;" />
 										</div>
 									
-
 					</div>
 					</div>	
 				</details>
 			
-
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<input type="submit" class="btn btn-success btn-block"
@@ -168,9 +173,7 @@
 		</form>
 		<!-- ---------------------------------------------------------------- -->
 		<br>
-
 		<h3 style="color:white">Informacion de Mis Pois</h3>
-
 		<br>
 		<div class="table-responsive">
 			<table class="table  table-light table-hover table-bordered">
@@ -203,9 +206,7 @@
 							th:onclick="'javascript:confirmarEliminar(\''+${po.codigo}+'\');'">
 								<i class="fa fa-trash-alt"></i>
 						</a></td>
-
 					</div>
-
 				</tr>
 			</table>
 		</div>
@@ -242,9 +243,8 @@
 				</div>
 			</div>
 		</div>
-
 		<h4 style="color:white">Visualizacion de de Mis Pois</h4>
-
+		<div>
 			<div class="row">
 					<div th:each="c : ${pols}">
 						<div  th:if="${unTurista == c.turista}">
@@ -295,10 +295,8 @@
 			</div>
 		</div>
 	</div>
-
 	<br>
 	<div th:insert="layout/footer :: footer"></div>
-
 	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
 		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
@@ -323,33 +321,6 @@
 									$("#modalVender").modal("show").find(".modal-content").load($(this).attr("href"));
 								});
 					});
-		</script>
-	<script type="text/javascript">
-	$(function a() {
-
-		  var // Define maximum number of files.
-		      max_file_number = 3,
-		      // Define your form id or class or just tag.
-		      $form = $('file'), 
-		      // Define your upload field class or id or tag.
-		      $file_upload = $('#image_upload', $form), 
-		      // Define your submit class or id or tag.
-		      $button = $('.submit', $form); 
-
-		  // Disable submit button on page ready.
-		  $button.prop('disabled', 'disabled');
-
-		  $file_upload.on('change', function () {
-		    var number_of_images = $(this)[0].files.length;
-		    if (number_of_images > max_file_number) {
-		      alert(`You can upload maximum ${max_file_number} files.`);
-		      $(this).val('');
-		      $button.prop('disabled', 'disabled');
-		    } else {
-		      $button.prop('disabled', false);
-		    }
-		  });
-		});
-      </script>		
+		</script>	
 </body>
 </html>

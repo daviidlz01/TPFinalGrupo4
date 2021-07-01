@@ -1,5 +1,8 @@
 package ar.edu.unju.edm.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -19,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table (name="POLS")
 @Component
-public class Pol {
+public class Pol implements Comparable<Pol>{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native", strategy="native")
@@ -27,7 +31,7 @@ public class Pol {
 	private Integer codigo;
 	@Column
 	@NotBlank(message="El nombre del PoI es obligatorio")
-	@Pattern(regexp="[A-Za-z]+",message="Solo se permiten letras")
+	@Pattern(regexp="[A-Za-z' ']+",message="Solo se permiten letras")
 	private String nombre;
 	@Column
 	@NotBlank(message="La descripcion es obligatoria")
@@ -51,18 +55,22 @@ public class Pol {
 	@NotBlank(message="Campo obligatorio")
 	private String calle;
 	@Column
-	private int localizacionLatitud;
+	private double localizacionLatitud;
 	@Column
-	private int localizacionLongitud;
+	private double localizacionLongitud;
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace;
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace2;
 	@Column(columnDefinition = "LONGBLOB")
 	private String fotoEnlace3;
+	@Column
+	private int estrellas;
 	@ManyToOne
 	@JoinColumn(name = "correo",referencedColumnName="idTurista")
 	private Turista turista;
+	@OneToMany(mappedBy="pol",cascade=CascadeType.ALL)
+	private List<Turista_Pols> turista_pols;
 	public Pol() {
 		// TODO Auto-generated constructor stub
 	}
@@ -134,17 +142,17 @@ public class Pol {
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
-	public int getLocalizacionLatitud() {
+	public double getLocalizacionLatitud() {
 		return localizacionLatitud;
 	}
-	public void setLocalizacionLatitud(int localizacionLatitud) {
-		this.localizacionLatitud = localizacionLatitud;
+	public void setLocalizacionLatitud(double d) {
+		this.localizacionLatitud = d;
 	}
-	public int getLocalizacionLongitud() {
+	public double getLocalizacionLongitud() {
 		return localizacionLongitud;
 	}
-	public void setLocalizacionLongitud(int localizacionLongitud) {
-		this.localizacionLongitud = localizacionLongitud;
+	public void setLocalizacionLongitud(double d) {
+		this.localizacionLongitud = d;
 	}
 	public Integer getCodigo() {
 		return codigo;
@@ -183,6 +191,25 @@ public class Pol {
 
 	public void setTurista(Turista turista) {
 		this.turista = turista;
+	}
+
+	public int getEstrellas() {
+		return estrellas;
+	}
+
+	public void setEstrellas(int estrellas) {
+		this.estrellas = estrellas;
+	}
+
+	@Override
+	public int compareTo(Pol o) {
+		if (this.estrellas == o.getEstrellas()) {
+            return 0;
+        } else if (this.estrellas > o.getEstrellas()) {
+            return 1;
+        } else {
+            return -1;
+        }
 	}
 	
 }
