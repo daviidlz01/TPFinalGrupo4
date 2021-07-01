@@ -52,6 +52,8 @@ public class Turista_PolsController {
 			model.addAttribute("valora",tp.getValoracionGeneral(t_pService.obtenerTodosTurista_pols(),tp.getPol().getCodigo()));
 			model.addAttribute("verificar",tp.getVerificarValoracion(t_pService.obtenerTodosTurista_pols(), tp.getPol().getCodigo(), turistaService.encontrarUnTurista(userTurista.getUsername()).getIdTurista()));
 			model.addAttribute("cont",tp.getVotosPols(t_pService.obtenerTodosTurista_pols(),tp.getPol().getCodigo()));
+			polSeleccionado.setEstrellas(tp.getValoracionGeneral(t_pService.obtenerTodosTurista_pols(),tp.getPol().getCodigo()));
+			polService.modificarPol2(polSeleccionado);
 		}
 		catch (Exception e){
 			model.addAttribute("formUsuarioErrorMessage",e.getMessage());

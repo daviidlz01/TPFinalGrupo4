@@ -63,4 +63,14 @@ public class PolServiceMySQL implements IPolService {
 		hacia.setTurista(desde.getTurista());
 	}
 
+	@Override
+	public void modificarPol2(Pol polModificado) throws Exception {
+		Pol polAModificar = polDAO.findByCodigo(polModificado.getCodigo())
+				.orElseThrow(() -> new Exception("El Cliente no fue encontrado"));
+		cambiarPol2(polModificado, polAModificar);
+		polDAO.save(polModificado);
+	}
+	private void cambiarPol2(Pol desde, Pol hacia) {
+		hacia.setEstrellas(desde.getEstrellas());
+	}
 }

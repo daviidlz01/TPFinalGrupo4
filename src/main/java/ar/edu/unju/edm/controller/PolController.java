@@ -1,9 +1,9 @@
 package ar.edu.unju.edm.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Base64;
-import java.util.List;
+
 
 import javax.validation.Valid;
 
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import ar.edu.unju.edm.model.Fotografia;
+
 import ar.edu.unju.edm.model.Pol;
 import ar.edu.unju.edm.model.Turista;
 import ar.edu.unju.edm.service.IPolService;
@@ -33,8 +33,6 @@ public class PolController {
 	@Autowired
 	IPolService polservice;
 	@Autowired
-	Fotografia foto;
-	@Autowired
 	ITuristasService turistaService;
 	private static final Log LOGGER = LogFactory.getLog(PolController.class);
 	@GetMapping("/pol/mostrar")
@@ -44,7 +42,6 @@ public class PolController {
 		UserDetails userTurista = (UserDetails) authentication.getPrincipal();
 		model.addAttribute("unTurista",turistaService.encontrarUnTurista(userTurista.getUsername()));
 		model.addAttribute("pols", polservice.obtenerTodosPols());
-		model.addAttribute("foto",foto);
 		return "pol";
 	}
 
@@ -66,22 +63,22 @@ public class PolController {
 		return "pol";
 	}
 	@PostMapping(value="/pol/guardar",consumes="multipart/form-data")
-	public String guardarPol(@RequestParam("file") MultipartFile file,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3, @Valid @ModelAttribute("unPol") Pol nuevoPol, BindingResult resultado,@Valid @ModelAttribute("unTurista") Turista nuevoTurista, Model model)throws IOException {
+	public String guardarPol(@RequestParam("file") MultipartFile file,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3, @Valid @ModelAttribute("unPol") Pol nuevoPol, BindingResult resultado,@ModelAttribute("unTurista") Turista nuevoTurista, Model model)throws Exception {
 		if (resultado.hasErrors()) {
-			LOGGER.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-			System.out.println("cccccccccccccccccccccccccccc");
+			LOGGER.info("Esto lanzara un error");
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
 			model.addAttribute("unPol", nuevoPol);
 			model.addAttribute("pols", polservice.obtenerTodosPols());
 			return "pol";
 		} else {
-			LOGGER.info("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+			LOGGER.info("Guardando poi");
+			System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
 			byte[] content = file.getBytes();
 			byte[] content2 = file2.getBytes();
 			byte[] content3 = file3.getBytes();
 			String base64 = Base64.getEncoder().encodeToString(content);
 			String base65 = Base64.getEncoder().encodeToString(content2);
 			String base66 = Base64.getEncoder().encodeToString(content3);
-			List<Pol> imagenes=new ArrayList<>();
 			nuevoPol.setFotoEnlace(base64);
 			if(base65.equals("")) {
 				
@@ -95,19 +92,18 @@ public class PolController {
 			else {
 				nuevoPol.setFotoEnlace2(base66);
 			}
-			imagenes.add(nuevoPol);
-			LOGGER.info("Hola soy:"+base65+"a");
+			
 			polservice.guardarPol(nuevoPol);
+			nuevoPol.setLocalizacionLatitud((Math.random() * -1000) + 1);
+			nuevoPol.setLocalizacionLongitud((Math.random() * -1000) + 1);
 			nuevoTurista.setPuntos(10+nuevoTurista.getPuntos());
+			System.out.println("ccccccccccccccccccccccccccccccc");
 			try {
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
 				turistaService.modificarTurista2(nuevoTurista);
-				System.out.println("dddddddddddddddddddddddd");
 			} catch (Exception e) {
-				System.out.println("bbbbbbbbbbbbbbbbbbbbbbbb");
 				e.printStackTrace();
 			}
-			model.addAttribute("imagenes",imagenes);
+			System.out.println("ddddddddddddddddddddddddddddddd");
 			model.addAttribute("unPol", new Pol());
 			model.addAttribute("pols", polservice.obtenerTodosPols());
 			return "redirect:/pol/mostrar";
@@ -137,6 +133,8 @@ public class PolController {
 			else {
 				polModificado.setFotoEnlace3(base66);
 			}
+			polModificado.setLocalizacionLatitud((Math.random() * -1000) + 1);
+			polModificado.setLocalizacionLongitud((Math.random() * -1000) + 1);
 			polservice.modificarPol(polModificado);
 			model.addAttribute("unPol", new Pol());
 			model.addAttribute("editMode", "false");

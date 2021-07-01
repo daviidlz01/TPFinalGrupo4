@@ -28,7 +28,7 @@ public class AutenticationHandler implements AuthenticationSuccessHandler{
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
 		for (GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("DNI")) {
+			if (grantedAuthority.getAuthority().equals("SI")) {
 				DNI = true;
 				break;
 			} else {
@@ -49,7 +49,7 @@ public class AutenticationHandler implements AuthenticationSuccessHandler{
 				redirectStrategy.sendRedirect(request, response, "/consultor");
 			} else {
 				if (userRegistrador) {
-					redirectStrategy.sendRedirect(request, response, "/pol/mostrar");
+					redirectStrategy.sendRedirect(request, response, "/logout");
 				} else {
 					throw new IllegalStateException();
 				}

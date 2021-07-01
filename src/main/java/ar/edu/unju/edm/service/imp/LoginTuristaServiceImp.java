@@ -26,7 +26,7 @@ public class LoginTuristaServiceImp implements UserDetailsService{
 		// TODO Auto-generated method stub
 		Turista turistaEncontrado=turistaDAO.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("Turista inválido"));
 		List<GrantedAuthority> tipos = new ArrayList<>(); 
-		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(turistaEncontrado.getNombre());
+		GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(turistaEncontrado.getActivo());
 		tipos.add(grantedAuthority);
 		
 		UserDetails user = (UserDetails) new User(email, turistaEncontrado.getPassword(), tipos);

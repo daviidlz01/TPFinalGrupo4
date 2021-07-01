@@ -51,16 +51,14 @@ public class TuristasServiceMySQL implements ITuristasService {
 	public void eliminarTurista(int id) throws Exception {
 		// TODO Auto-generated method stub
 		Turista turistaAEliminar= turistaDAO.findById(id).orElseThrow(()->new Exception("El Turista no fue encontrado"));
+		turistaAEliminar.setActivo("NO");
 		turistaDAO.delete(turistaAEliminar);
 	}
 	@Override
 	public void modificarTurista(Turista turistaModificado) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
 		Turista turistaAModificar = turistaDAO.findById(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
 		cambiarTurista(turistaModificado, turistaAModificar);
-		System.out.println("ccccccccccccccccccccccc");
 		turistaDAO.save(turistaAModificar);
 	}
 	private void cambiarTurista (Turista desde, Turista hacia) {
@@ -79,17 +77,24 @@ public class TuristasServiceMySQL implements ITuristasService {
 	@Override
 	public void modificarTurista2(Turista turistaModificado) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
 		Turista turistaAModificar = turistaDAO.findById(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
 		cambiarTurista2(turistaModificado, turistaAModificar);
-		System.out.println("ccccccccccccccccccccccc");
 		turistaDAO.save(turistaAModificar);
 	}
 	private void cambiarTurista2 (Turista desde, Turista hacia) {
 		hacia.setPuntos(desde.getPuntos());
 	}
-	
+
+	@Override
+	public void modificarTurista3(Turista turistaModificado) throws Exception {
+		// TODO Auto-generated method stub
+		Turista turistaAModificar = turistaDAO.findById(turistaModificado.getIdTurista()).orElseThrow(()->new Exception("El Turista no fue encontrado"));
+		cambiarTurista3(turistaModificado, turistaAModificar);
+		turistaDAO.save(turistaAModificar);
+	}
+	private void cambiarTurista3 (Turista desde, Turista hacia) {
+		hacia.setActivo("NO");
+	}
 	
 
 

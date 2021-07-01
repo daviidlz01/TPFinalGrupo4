@@ -10,5 +10,6 @@ public interface IPolService {
 	public List<Pol> obtenerTodosPols();
 	public void eliminarPol(Integer codigo)throws Exception;
 	public void modificarPol(Pol polModificado)throws Exception;
+	public void modificarPol2(Pol polModificado)throws Exception;
 	public Pol encontrarUnPol(Integer codigo)throws Exception;
 }
