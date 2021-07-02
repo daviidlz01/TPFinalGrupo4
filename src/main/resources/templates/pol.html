@@ -9,6 +9,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 
 <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>	
+<link rel="shortcut icon" th:href="@{/img/logo-oficial2.jpg}">
 <meta charset="UTF-8">
 <title>Pol</title>
 </head>
@@ -37,7 +38,7 @@
 			</div>
 			<input type="hidden" th:field="*{codigo}" th:if="${editMode}">
 			<details>
-			<summary>Direcciones de referencia</summary>
+			<summary>Direcciones de referencia(Obligatorio)</summary>
 			<div class="form-row">
 				<div class="form-group col-md-3">
 					<label for="nombrepol">Calle</label> <input type="text"
@@ -131,7 +132,7 @@
 			</div>
 			
 				<details>
-					<summary>Desea agregar mas</summary>
+					<summary>¿Desea agregar mas?</summary>
 					<div class="form-row">
 					<div class="form-group col md-12">
 							<label for="file" class="col-sm-4 col-form-label" th:field="*{fotoEnlace2}">
@@ -270,7 +271,7 @@
 										 			<img th:src="*{'data:;base64,'+c.fotoEnlace3}" class="card-img-top" alt="imagen de producto" style="height: 200px;border:black solid 1px">
 										 		</div>
 										 		<div th:unless="${c.fotoEnlace3}">
-										 			<img th:src="@{/img/logo.jpg}" alt="img" style="height: 200px;border:black solid 1px">
+										 			<img th:src="@{/img/cancelado.png}" alt="img" style="height: 200px;border:black solid 1px">
 										 			
 										 		</div>
 										 	</div>
@@ -286,7 +287,8 @@
 			  						</div>					
 			  						<div class="card-body">
 									<p class="card-text" th:text="${'Nombre: '+c.nombre}">Nombre</p>
-									<p class="card-text" th:text="${'Codigo: '+c.codigo}">Codigo</p>
+									<p class="card-text" th:text="${'Descripcion: '+c.descripcion}">Descripcion</p>
+									<p class="card-text" th:text="${'Id: '+c.codigo}">Codigo</p>
 									</div>
 		  						</div>
 						</div>

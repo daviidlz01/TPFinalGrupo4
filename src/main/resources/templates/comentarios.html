@@ -9,6 +9,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
 
 <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>	
+<link rel="shortcut icon" th:href="@{/img/logo-oficial2.jpg}">
 <meta charset="UTF-8">
 <title>Pois</title>
 </head>
@@ -52,7 +53,7 @@
     </div>
 	<div style="background-image: url(https://c1.wallpaperflare.com/preview/916/1/165/flame-north-jujuy-coya.jpg);background-repeat: no-repeat;background-position: center center;background-attachment: fixed; background-size: cover;">
 	<div style="background-color: rgba(0, 0, 0, 0.65)">
-	<h3 style="text-align:center;color:white;background:black;margin-top:10px;">Pols Generales</h3>
+	<h3 style="text-align:center;color:white;background:black;margin-top:10px;">Todos los Pols</h3>
 		<div class="row">
 			<div th:each="p : ${pols}">
 						<div class="col-sm-6 ml-5">
@@ -66,12 +67,16 @@
 		  									<div th:if="${p.fotoEnlace2}">
 										 			<img th:src="*{'data:;base64,'+p.fotoEnlace2}" class="card-img-top " alt="imagen de producto" style="height: 200px;border:black solid 1px">
 										 	</div>
-										 	<div th:unless="${p.fotoEnlace2}">
-										 			<img src="..." alt="img">
-										 			<h5>No hay una imagen aqui</h5>
-    													<p>Siga avanzando</p>
-										 	</div>
 		  								</div>
+		  								<div class="carousel-item">
+										 		<div th:if="${p.fotoEnlace3}">
+										 			<img th:src="*{'data:;base64,'+p.fotoEnlace3}" class="card-img-top" alt="imagen de producto" style="height: 200px;border:black solid 1px">
+										 		</div>
+										 		<div th:unless="${p.fotoEnlace3}">
+										 			<img th:src="@{/img/cancelado.png}" alt="img" style="height: 200px;border:black solid 1px">
+										 			
+										 		</div>
+										 	</div>
 		  							</div>
 		  							<a th:if="${p.fotoEnlace2}" class="carousel-control-prev" th:href="${'#Nombre'+p.codigo}" role="button" data-slide="prev">
 								    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -86,7 +91,6 @@
 									<h5 class="card-title" th:text="${'Pol: ' + p.nombre}">Nombre</h5>
 									<h6>Descripcion</h6>
 									<p class="card-text" th:text="${p.descripcion}"></p>
-									<p class="card-text" th:text="${p.codigo}"></p>
 								</div>
 								<a class="stretched-link btn btn-primary mt-3" th:href="@{'/pol/comentarios/'+${p.codigo}+'/algo/'}">Ver mas detalles</a>
 							</div>

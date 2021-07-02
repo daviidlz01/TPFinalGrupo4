@@ -66,13 +66,13 @@ public class PolController {
 	public String guardarPol(@RequestParam("file") MultipartFile file,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3, @Valid @ModelAttribute("unPol") Pol nuevoPol, BindingResult resultado,@ModelAttribute("unTurista") Turista nuevoTurista, Model model)throws Exception {
 		if (resultado.hasErrors()) {
 			LOGGER.info("Esto lanzara un error");
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
+			
 			model.addAttribute("unPol", nuevoPol);
 			model.addAttribute("pols", polservice.obtenerTodosPols());
 			return "pol";
 		} else {
 			LOGGER.info("Guardando poi");
-			System.out.println("bbbbbbbbbbbbbbbbbbbbbbb");
+			
 			byte[] content = file.getBytes();
 			byte[] content2 = file2.getBytes();
 			byte[] content3 = file3.getBytes();
@@ -97,13 +97,13 @@ public class PolController {
 			nuevoPol.setLocalizacionLatitud((Math.random() * -1000) + 1);
 			nuevoPol.setLocalizacionLongitud((Math.random() * -1000) + 1);
 			nuevoTurista.setPuntos(10+nuevoTurista.getPuntos());
-			System.out.println("ccccccccccccccccccccccccccccccc");
+			
 			try {
 				turistaService.modificarTurista2(nuevoTurista);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("ddddddddddddddddddddddddddddddd");
+			
 			model.addAttribute("unPol", new Pol());
 			model.addAttribute("pols", polservice.obtenerTodosPols());
 			return "redirect:/pol/mostrar";

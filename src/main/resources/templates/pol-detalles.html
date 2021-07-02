@@ -6,17 +6,11 @@
 <link th:rel="stylesheet" type="text/css"
 	th:tref="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
 	<link rel="stylesheet" th:href="@{/css/polStyle.css}" type="text/css">
-<link th:rel="stylesheet"
-	th:tref="@{/webjars/font-awesome/5.11.2/css/all.css} " />
-<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<link rel="shortcut icon" th:href="@{/img/logo-oficial2.jpg}">	
 <meta charset="UTF-8">
 <title>Mas informacion</title>
 </head>
@@ -39,6 +33,15 @@
 									<img th:src="*{'data:;base64,'+fotoEnlace2}" class="card-img-top" alt="imagen de producto" style="height: 200px;">
 								</div>
 		  					</div>
+		  					<div class="carousel-item">
+										 		<div th:if="${unPol.fotoEnlace3}">
+										 			<img th:src="${'data:;base64,'+unPol.fotoEnlace3}" class="card-img-top" alt="imagen de producto" style="height: 200px">
+										 		</div>
+										 		<div th:unless="${unPol.fotoEnlace3}">
+										 			<img th:src="@{/img/cancelado.png}" alt="img" style="height: 200px">
+										 			
+										 		</div>
+										 	</div>
 		  					</div>
 		  					<a th:if="${unPol.fotoEnlace2}"class="carousel-control-prev" th:href="*{'#pol'+codigo}" role="button" data-slide="prev">
 							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -70,6 +73,12 @@
 							class="col-sm-2 col-md-2 col-form-label">Etiqueta</label>
 						<div class="col-sm-12 col-md-10">
 							<input type="text" id="eti" th:field="*{pol.etiqueta}"
+								class="form-control" disabled>
+						</div>
+						<label th:if="*{pol.sitioWeb != '' }" for="sitio"
+							class="col-sm-2 col-md-2 col-form-label">Sitio Web</label>
+						<div class="col-sm-12 col-md-10" th:if="*{pol.sitioWeb != '' }">
+							<input type="text" id="sitio" th:field="*{pol.sitioWeb}"
 								class="form-control" disabled>
 						</div>
 						<label for="dir"
