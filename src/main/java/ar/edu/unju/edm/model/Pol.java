@@ -31,7 +31,7 @@ public class Pol implements Comparable<Pol>{
 	private Integer codigo;
 	@Column
 	@NotBlank(message="El nombre del PoI es obligatorio")
-	@Pattern(regexp="[A-Za-z' ']+",message="Solo se permiten letras")
+	@Pattern(regexp="[A-Za-z' ']+",message="Solo se permiten letras, si es una combinacion escriba: ej 'calle doce' ")
 	private String nombre;
 	@Column
 	@NotBlank(message="La descripcion es obligatoria")
